@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mb"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/botonera"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seccioncolor"
+        android:layout_width="match_parent"
+        android:layout_height="265dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+
+        <SeekBar
+            android:id="@+id/RedSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#e57373"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+        <SeekBar
+            android:id="@+id/GreenSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#9ccc65"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+        <SeekBar
+            android:id="@+id/BlueSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="#42a5f5"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

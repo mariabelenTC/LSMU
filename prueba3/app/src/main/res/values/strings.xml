@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">prueba3</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="but_name">Pulsa esto</string>
+</resources>
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e1bee7"
+    android:gravity="bottom"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="216dp"
+        app:srcCompat="@drawable/mario_final" />
+
+    <LinearLayout
+        android:id="@+id/botonera"
+        android:layout_width="match_parent"
+        android:layout_height="181dp"
+        android:background="#efccf9"
+        android:gravity="bottom">
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="209dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/RedSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#e57373"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+        <SeekBar
+            android:id="@+id/GreenSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#9ccc65"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+        <SeekBar
+            android:id="@+id/BlueSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#42a5f5"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+    </LinearLayout>
+
+</LinearLayout>

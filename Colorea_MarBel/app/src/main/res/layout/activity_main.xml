@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e1bee7"
+    android:gravity="bottom"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/countdown_text"
+        android:layout_width="109dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:text="02:00"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="109dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="start"
+        android:textSize="20dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="-58dp" />
+    <Button
+        android:id="@+id/restart"
+        android:layout_width="109dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="-55dp"
+        android:text="reset"
+        android:textSize="20dp"
+        android:layout_marginLeft="260dp" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="172dp"
+        android:layout_marginLeft="9dp"
+        app:srcCompat="@drawable/mario_final4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="13dp" />
+
+    <LinearLayout
+        android:id="@+id/botonera"
+        android:layout_width="match_parent"
+        android:layout_height="181dp"
+        android:background="#efccf9"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="104dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center_vertical"
+            android:background="#A152AA"
+            android:text="finish"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="174dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <Button
+
+                android:id="@+id/muestra_color"
+                android:layout_width="221dp"
+                android:layout_height="wrap_content"
+                android:text="Tu color" />
+
+            <Button
+                android:id="@+id/help"
+                android:layout_width="47dp"
+                android:layout_height="32dp"
+                android:text="help"
+                android:textColor="#FFFF"
+                android:layout_marginLeft="100dp"
+                android:textSize="10dp"
+                android:background="#7316A2" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/RedSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#e57373"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+        <SeekBar
+            android:id="@+id/GreenSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#9ccc65"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+        <SeekBar
+            android:id="@+id/BlueSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:background="#42a5f5"
+            android:max="255"
+            android:thumbTint="#212121" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

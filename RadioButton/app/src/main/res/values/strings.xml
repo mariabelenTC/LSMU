@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">App1</string>
+    <string name="opciones">selecciona: w</string>
+    <string name="Boton1">boton 1 </string>
+    <string name="Boton2">boton 2 </string>
+    <string name="Boton3">boton 3</string>
+
+</resources>
