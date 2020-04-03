@@ -259,44 +259,7 @@ public class MainActivity extends AppCompatActivity {
      * Añade 3 seekbar a un LinearLayout.
      *
      */
-    private SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
 
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-        }
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            switch (seekBar.getId()) {
-                case R.id.RedSeekBar:
-                    seekR = progress;
-                    break;
-                case R.id.GreenSeekBar:
-                    seekG = progress;
-                    break;
-                case R.id.BlueSeekBar:
-                    seekB = progress;
-                    break;
-            }
-
-            showFinalColor();
-
-        }
-    };
-    private void showFinalColor() {
-        int color = Color.rgb(seekR, seekG, seekB);
-        Button muestra= (Button)findViewById(R.id.muestra_color);
-        muestra.setBackground(new ColorDrawable(color));
-        String txt = "tu configuracion es: " + Integer.toString(seekR) + Integer.toString( seekG) + Integer.toString(seekB);
-        String txt2 = "mi color: " + Integer.toString(color);
-        Log.v(TAG, txt);
-        Log.v(TAG, txt2);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -346,10 +309,15 @@ public class MainActivity extends AppCompatActivity {
         SeekBar sbR = (SeekBar) findViewById(R.id.RedSeekBar);
         SeekBar sbG = (SeekBar) findViewById(R.id.GreenSeekBar);
         SeekBar sbB = (SeekBar) findViewById(R.id.BlueSeekBar);
+
+
+
+        SeekBar_Listener seek = new SeekBar_Listener(this,seekR,seekG,seekB);
+
         // Asigna el listenner a los seekbar
-        sbR.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        sbG.setOnSeekBarChangeListener(onSeekBarChangeListener);
-        sbB.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        sbR.setOnSeekBarChangeListener(seek);
+        sbG.setOnSeekBarChangeListener(seek);
+        sbB.setOnSeekBarChangeListener(seek);
 
     }
 
@@ -494,6 +462,7 @@ public class MainActivity extends AppCompatActivity {
 
         return new int[]{displayMetrics.heightPixels, displayMetrics.widthPixels};
     }
+
 
 }
 

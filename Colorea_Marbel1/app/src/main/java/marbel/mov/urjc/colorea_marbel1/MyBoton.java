@@ -1,6 +1,7 @@
 package marbel.mov.urjc.colorea_marbel1;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Button;
 
 
@@ -40,4 +41,7 @@ public class MyBoton extends Button {
     }
     public int getColor_play() { return this.color_play; }
     public void setColor_play(int color_play) { this.color_play = color_play; }
+
+
+
 }
