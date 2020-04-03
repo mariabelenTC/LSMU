@@ -23,15 +23,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "variables";
+
     private static final String TAG1 = "colores";
-    private static final String TAG2 = "puntuacion";
-    private static final String TAG3 = "score_botton";
-    private static final String TAG4 = "rgb_score";
 
     private int seekR=0, seekG=0, seekB=0;
     private int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
     private long timeleftinMilliseconds=tiempo;
+    private long countDownInterval=1000;
     private boolean  timeRunning=false;
     private int time = Toast.LENGTH_SHORT;
 
@@ -43,195 +41,63 @@ public class MainActivity extends AppCompatActivity {
     private Button boton_Start, boton_Restart, boton_finisht, boton_help;
     private CountDownTimer countDownTimer;
 
-    /**
-     * Obtiener la puntuacion de un elemento del color (R,G,B)
-     * @param color_original el color que deberia tener
-     * @param color_asignado el color que asigna el jugador.
-     * @return
-     */
-    private int score(int color_original, int color_asignado){
-        float resta = Math.abs(color_original - color_asignado);
-        Log.v(TAG4, ("resta: " + Float.toString(resta)));
-        float score = (float)((-510/255)* (int)resta +510);
-        //float score = (float) ((-100/255)*resta+100);
-        Log.v(TAG4, ("calcular score: " + Integer.toString((int)score)));
-        return (int)score;
-    }
-    /**
-     * Obtener puntuacion de todos los botones
-     * y calcular si se ha superado el minimo o no.
-     */
-    private void getScore(){
-        int total_score=0;
-        int score_max=1530*totalBotones;
-        Log.v(TAG2, ("puntuacion Maxima: " + Integer.toString(score_max)));
+    //Instanciar la clase
+    Puntuacion score = new Puntuacion(MainActivity.this,totalBotones,fila,columna,botonera,time);
 
-        int colorR_score, colorG_score, colorB_score, score_boton;
-
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-
-
-                Log.v(TAG3, ("posicion: (" + Integer.toString(i) +
-                        ", " + Integer.toString(j) + ") "));
-
-                int r = Color.red(botonera[i][j].getColor());
-                int g = Color.green(botonera[i][j].getColor());
-                int b = Color.blue(botonera[i][j].getColor());
-                Log.v(TAG3, ("red_o: " + Integer.toString(r) +
-                        " green_o: " + Integer.toString(g) +
-                        " blue_o: " + Integer.toString(b)));
-
-
-                int r_p = Color.red(botonera[i][j].getColor_play());
-                int g_p = Color.green(botonera[i][j].getColor_play());
-                int b_p = Color.blue(botonera[i][j].getColor_play());
-                Log.v(TAG3, ("red_play: " + Integer.toString(r_p) +
-                        " green_play: " + Integer.toString(g_p) +
-                        " blue_play: " + Integer.toString(b_p)));
-
-
-                colorR_score = score(r, r_p);
-                colorG_score = score(g, g_p);
-                colorB_score = score(b, b_p);
-                Log.v(TAG3, ("score_R: " + Integer.toString(colorR_score) +
-                        " score G: " + Integer.toString(colorG_score) +
-                        " score_B: " + Integer.toString(colorB_score)));
-
-                score_boton = colorR_score + colorG_score + colorB_score;
-                Log.v(TAG3, ("score del boton: " + Integer.toString(score_boton)));
-
-                total_score = total_score + score_boton;
-            }
-        }
-        int min=(score_max *8)/9;
-        Log.v(TAG2,("puntuación minima: " + Integer.toString(min)));
-
-        if (total_score>= ((score_max *8)/9)){
-
-            Log.v(TAG2,("has ganado y tu puntación es: " + Integer.toString(total_score)));
-
-            String msg_w = ("::: WINNER :::  score"  + Integer.toString(total_score));
-            Toast msg = Toast.makeText(MainActivity.this, msg_w, time);
-            msg.show();
-
-        }else {
-
-            Log.v(TAG2,("has perdido y tu puntación es: " + Integer.toString(total_score)));
-            
-            String msg_l = ("::: LOSER :::score"  + Integer.toString(total_score));
-            Toast msg = Toast.makeText(MainActivity.this, msg_l, time);
-            msg.show();
-        }
-    }
+    Botonera bot=new Botonera(botonera,fila,columna);
+    final Temporizador temp=new Temporizador(this,timeleftinMilliseconds,countDownInterval,timeRunning,tiempo,score);
 
     private View.OnClickListener put_toast = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(v.getId()==R.id.start){
-                timeleftinMilliseconds=tiempo;
-                //Log.v(TAG1,("pulsado start"));
-                restartColorbotons();
-                startTime();
+            switch (v.getId()) {
+                case R.id.start:
+                    timeleftinMilliseconds = tiempo;
+                    //Log.v(TAG1,("pulsado start"));
+                    bot.restartColorbotons();
+                    temp.start();
+                    timeRunning=true;
+                    break;
 
-            }else if(v.getId()==R.id.restart) {
-                //Log.v(TAG1, ("pulsar restart"));
-                restartColorbotons();
-                restartTime();
+                case R.id.restart:
+                    //Log.v(TAG1, ("pulsar restart"));
+                    bot.restartColorbotons();
+                    temp.restartTime();
+                    break;
+                case R.id.finish:
+                    if (timeRunning) {
 
-            }else if(v.getId()== R.id.finish) {
-                if (timeRunning) {
+                        countDownTimer.cancel();
+                        score.getScore();
+                        timeRunning = false;
 
-                    countDownTimer.cancel();
-                    getScore();
-                    timeRunning = false;
+                    } else {
+                        Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
+                        msg.show();
 
-                } else {
-                    Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
-                    msg.show();
+                    }
+                    break;
+                case R.id.help:
+                    if (timeRunning == false) {
+                        bot.helpColorbotons();
+                        Toast msg = Toast.makeText(MainActivity.this, "help", time);
+                        msg.show();
 
-                }
-            }else if(v.getId()==R.id.help){
-                if(timeRunning==false){
-                    helpColorbotons();
-                    Toast msg = Toast.makeText(MainActivity.this, "help", time);
-                    msg.show();
+                    } else {
+                        Toast msg = Toast.makeText(MainActivity.this, "not allowed", time);
+                        msg.show();
+                    }
 
-                }else{
-                    Toast msg = Toast.makeText(MainActivity.this, "not allowed", time);
-                    msg.show();
-                }
-
-            }else{
-                put_toasts(v);
+                default:
+                    put_toasts(v);
+                    break;
             }
+
         }
+
+
+
     };
-
-
-    private void restartColorbotons(){
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                //Asigna al botón el color blanco
-                int color = Color.rgb(255, 255, 255);
-                botonera[i][j].setBackground(new ColorDrawable(color));
-                botonera[i][j].setColor_play(color);
-            }
-        }
-
-    }
-    private void helpColorbotons(){
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                //Asigna al botón el color blanco
-                int color =botonera[i][j].getColor();
-                botonera[i][j].setBackground(new ColorDrawable(color));
-            }
-        }
-
-
-    }
-    private void startTime(){
-        countDownTimer = new CountDownTimer(timeleftinMilliseconds,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeleftinMilliseconds=millisUntilFinished;
-                updateTimer();
-
-            }
-
-            @Override
-            public void onFinish() {
-                timeRunning=false;
-                int time = Toast.LENGTH_SHORT;
-                Toast msg = Toast.makeText(MainActivity.this, "time finished", time);
-                msg.show();
-                getScore();
-
-
-            }
-        }.start();
-        timeRunning=true;
-    }
-    private void restartTime(){
-        timeleftinMilliseconds=tiempo;
-        if(timeRunning){
-            timeRunning=false;
-            countDownTimer.cancel();;
-            updateTimer();
-        }
-
-    }
-    private void updateTimer(){
-        int minutes=(int) timeleftinMilliseconds/60000;
-        int seconds=(int) timeleftinMilliseconds % 60000/1000;
-        String timelefText;
-        timelefText = "" + minutes;
-        timelefText+=":";
-        if (seconds<2) timelefText +="0";
-        timelefText+=seconds;
-        countadown_Text.setText(timelefText);
-    }
 
 
     private void put_toasts(View v){
@@ -255,10 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Añade 3 seekbar a un LinearLayout.
-     *
-     */
+
 
 
     @Override
@@ -310,10 +173,7 @@ public class MainActivity extends AppCompatActivity {
         SeekBar sbG = (SeekBar) findViewById(R.id.GreenSeekBar);
         SeekBar sbB = (SeekBar) findViewById(R.id.BlueSeekBar);
 
-
-
         SeekBar_Listener seek = new SeekBar_Listener(this,seekR,seekG,seekB);
-
         // Asigna el listenner a los seekbar
         sbR.setOnSeekBarChangeListener(seek);
         sbG.setOnSeekBarChangeListener(seek);
@@ -321,27 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Añade Myboton a un arraybidimensional.
-     * @param boton boton de tipo MyBoton que quiero guardar
-     * @param x fila
-     * @param y columna
-     * @param color_original color del pixel que deberia tener.
-     * @return
-     *
-     */
-    private MyBoton[][] addBottons(MyBoton boton, int x, int y, int color_original) {
 
-        boton.setPos_x(x);
-        boton.setPos_y(y);
-        boton.setColor(color_original);
-        boton.setColor_play(-1);
-        botonera[x][y]=boton;
-
-        Log.v(TAG1,("x:"+ Integer.toString(x)+ " y: " + Integer.toString(y)));
-        return botonera;
-
-    }
     /**
      * Añade botones a un gridLayout con los colores de una imagen.
      * @param gridLayout GridLayout
@@ -391,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                 b.setOnClickListener(put_toast);
 
                 // Guardar botones en el Array botonera;
-                botonera= this.addBottons(b,i, j, color_original);
+                botonera= bot.addBottons(b,i, j, color_original);
 
                 //Añade el botón al GridLayout
                 gridLayout.addView(b, indice);

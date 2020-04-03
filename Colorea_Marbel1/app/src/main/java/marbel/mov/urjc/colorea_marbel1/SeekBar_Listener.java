@@ -14,10 +14,10 @@ public class SeekBar_Listener implements SeekBar.OnSeekBarChangeListener {
 
 
     public SeekBar_Listener(MainActivity w, int r,int g, int b){
-        mainWin=w;
-        seekR=r;
-        seekG=g;
-        seekB=b;
+        this.mainWin=w;
+        this.seekR=r;
+        this.seekG=g;
+        this.seekB=b;
 
     }
 
@@ -43,13 +43,15 @@ public class SeekBar_Listener implements SeekBar.OnSeekBarChangeListener {
             case R.id.BlueSeekBar:
                 seekB = progress;
                 break;
+                //default:
+
         }
 
         showFinalColor();
 
     }
 
-    private void showFinalColor() {
+    public void showFinalColor() {
         int color = Color.rgb(seekR, seekG, seekB);
 
         Button muestra= (Button) mainWin.findViewById(R.id.muestra_color);
