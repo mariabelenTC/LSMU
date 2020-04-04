@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG3 = "score_botton";
     private static final String TAG4 = "rgb_score";
 
-    private int seekR=0, seekG=0, seekB=0;
+    private int seekR=0, seekG=0, seekB=0, color_muestra;
     private int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
     private long timeleftinMilliseconds=tiempo;
     private boolean  timeRunning=false;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
     /**
      * Obtener puntuacion de todos los botones
-     * y calcular si se ha superado el minimo o no.
+     * y calcular si se ha superado el minimo o no. 644267769
      */
     private void getScore(){
         int total_score=0;
@@ -236,7 +236,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void put_toasts(View v){
         MyBoton b= (MyBoton) v;
+
         int time = Toast.LENGTH_SHORT;
+
         int color = Color.rgb(seekR, seekG, seekB);
         if (timeRunning){
             b.setBackground(new ColorDrawable(color));
@@ -255,10 +257,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Añade 3 seekbar a un LinearLayout.
-     *
-     */
+
 
 
     @Override
@@ -311,15 +310,23 @@ public class MainActivity extends AppCompatActivity {
         SeekBar sbB = (SeekBar) findViewById(R.id.BlueSeekBar);
 
 
+        Button muestra= (Button) findViewById(R.id.muestra_color);
 
-        SeekBar_Listener seek = new SeekBar_Listener(this,seekR,seekG,seekB);
 
+        Colores seek = new Colores(muestra);
         // Asigna el listenner a los seekbar
         sbR.setOnSeekBarChangeListener(seek);
         sbG.setOnSeekBarChangeListener(seek);
         sbB.setOnSeekBarChangeListener(seek);
 
+
+
+
+
+
     }
+
+
 
     /**
      * Añade Myboton a un arraybidimensional.
