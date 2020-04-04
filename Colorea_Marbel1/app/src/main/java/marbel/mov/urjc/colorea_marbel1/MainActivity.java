@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG3 = "score_botton";
     private static final String TAG4 = "rgb_score";
 
-    private int seekR=0, seekG=0, seekB=0, color_muestra;
+    public int seekR=0, seekG=0, seekB=0, color_muestra;
     private int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
     private long timeleftinMilliseconds=tiempo;
     private boolean  timeRunning=false;
@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
         Button muestra= (Button) findViewById(R.id.muestra_color);
 
 
-        Colores seek = new Colores(muestra);
+        Colores seek = new Colores(this,muestra);
         // Asigna el listenner a los seekbar
         sbR.setOnSeekBarChangeListener(seek);
         sbG.setOnSeekBarChangeListener(seek);
