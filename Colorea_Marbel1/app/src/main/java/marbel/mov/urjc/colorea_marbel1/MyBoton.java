@@ -1,7 +1,6 @@
 package marbel.mov.urjc.colorea_marbel1;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Button;
 
 

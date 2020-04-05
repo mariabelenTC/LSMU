@@ -30,18 +30,21 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG4 = "rgb_score";
 
     public int seekR=0, seekG=0, seekB=0, color_muestra;
-    private int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
-    private long timeleftinMilliseconds=tiempo;
-    private boolean  timeRunning=false;
-    private int time = Toast.LENGTH_SHORT;
+    public int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
+    public long timeleftinMilliseconds=tiempo, countDownInterval=1000;
 
-    private  int totalBotones;
-    private  int fila=0, columna=0;
+    public TextView countadown_Text;
+    public boolean  timeRunning=false;
+    public CountDownTimer countDownTimer;
+    public int time = Toast.LENGTH_SHORT;
 
-    private MyBoton[][] botonera;
-    private TextView countadown_Text;
-    private Button boton_Start, boton_Restart, boton_finisht, boton_help;
-    private CountDownTimer countDownTimer;
+    public   int totalBotones;
+    public   int fila=0, columna=0;
+    public   Temporizador temporizador;
+    public MyBoton[][] botonera;
+
+    public Button boton_Start, boton_Restart, boton_finisht, boton_help;
+
 
     /**
      * Obtiener la puntuacion de un elemento del color (R,G,B)
@@ -128,42 +131,39 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener put_toast = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(v.getId()==R.id.start){
-                timeleftinMilliseconds=tiempo;
-                //Log.v(TAG1,("pulsado start"));
-                restartColorbotons();
-                startTime();
 
-            }else if(v.getId()==R.id.restart) {
-                //Log.v(TAG1, ("pulsar restart"));
-                restartColorbotons();
-                restartTime();
+            switch (v.getId()){
+                case R.id.start:
+                    //Log.v(TAG1,("pulsado start"));
+                    restartColorbotons();
+                    //temporizador=new Temporizador(MainActivity.this,timeleftinMilliseconds,countDownInterval);
+                    timeRunning=true;
+                    //temporizador.start();
 
-            }else if(v.getId()== R.id.finish) {
-                if (timeRunning) {
+                case R.id.restart:
+                    //Log.v(TAG1, ("pulsar restart"));
 
-                    countDownTimer.cancel();
-                    getScore();
-                    timeRunning = false;
+                    if(timeRunning){
+                        restartColorbotons();
+                        //temporizador.restartTime();
 
-                } else {
-                    Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
-                    msg.show();
+                    }
 
-                }
-            }else if(v.getId()==R.id.help){
-                if(timeRunning==false){
-                    helpColorbotons();
-                    Toast msg = Toast.makeText(MainActivity.this, "help", time);
-                    msg.show();
+                case R.id.finish:
+                    if (timeRunning) {
 
-                }else{
-                    Toast msg = Toast.makeText(MainActivity.this, "not allowed", time);
-                    msg.show();
-                }
+                        //temporizador.cancel();
+                        //getScore();
+                        timeRunning = false;
 
-            }else{
-                put_toasts(v);
+                    } else {
+                        Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
+                        msg.show();
+
+                    }
+                default:
+                    put_toasts(v);
+
             }
         }
     };
@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    /*
     private void startTime(){
         countDownTimer = new CountDownTimer(timeleftinMilliseconds,1000) {
             @Override
@@ -217,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
         timeleftinMilliseconds=tiempo;
         if(timeRunning){
             timeRunning=false;
-            countDownTimer.cancel();;
+            countDownTimer.cancel();
             updateTimer();
         }
 
@@ -232,6 +233,8 @@ public class MainActivity extends AppCompatActivity {
         timelefText+=seconds;
         countadown_Text.setText(timelefText);
     }
+
+     */
 
 
     private void put_toasts(View v){
@@ -318,8 +321,6 @@ public class MainActivity extends AppCompatActivity {
         sbR.setOnSeekBarChangeListener(seek);
         sbG.setOnSeekBarChangeListener(seek);
         sbB.setOnSeekBarChangeListener(seek);
-
-
 
 
 

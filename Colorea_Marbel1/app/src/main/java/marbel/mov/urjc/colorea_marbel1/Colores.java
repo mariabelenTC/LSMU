@@ -3,7 +3,6 @@ package marbel.mov.urjc.colorea_marbel1;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 
@@ -13,7 +12,6 @@ public class Colores implements SeekBar.OnSeekBarChangeListener {
     private Button boton_muestra;
     private static final String TAG = "idSeekBar";
     private static final String TAG1 = "seekbar";
-    private int colorRGB;
 
     public Colores(MainActivity w,Button muestra){
         mainWin=w;
@@ -49,24 +47,20 @@ public class Colores implements SeekBar.OnSeekBarChangeListener {
                 break;
         }
 
-
-
         showFinalColor();
-
     }
 
 
     private void showFinalColor() {
 
         int color = Color.rgb(mainWin.seekR, mainWin.seekG, mainWin.seekB);
-        int colorRGB = color;
         boton_muestra.setBackground(new ColorDrawable(color));
 
-        /*String txt = "tu configuracion es: " + Integer.toString(seekR) + Integer.toString( seekG) + Integer.toString(seekB);
+        String txt = "tu configuracion es: " + Integer.toString(mainWin.seekR) + Integer.toString( mainWin.seekG) + Integer.toString(mainWin.seekB);
         String txt2 = "mi color: " + Integer.toString(color);
         Log.v(TAG1, txt);
         Log.v(TAG1, txt2);
 
-         */
+
     }
 }
