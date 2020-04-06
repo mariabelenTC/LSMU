@@ -45,9 +45,13 @@ public class Temporizador extends CountDownTimer {
         m.timeleftinMilliseconds=m.tiempo;
         if(m.timeRunning){
             m.timeRunning=false;
-
+            cancel();
             updateTimer();
+
+
+
         }
+
 
     }
     public void updateTimer(){

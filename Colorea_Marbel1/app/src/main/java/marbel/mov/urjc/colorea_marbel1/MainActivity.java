@@ -136,19 +136,21 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.start:
                     //Log.v(TAG1,("pulsado start"));
                     restartColorbotons();
-                    //temporizador=new Temporizador(MainActivity.this,timeleftinMilliseconds,countDownInterval);
+                    temporizador=new Temporizador(MainActivity.this,timeleftinMilliseconds,countDownInterval);
                     timeRunning=true;
-                    //temporizador.start();
+                    temporizador.start();
+                    break;
 
                 case R.id.restart:
                     //Log.v(TAG1, ("pulsar restart"));
 
                     if(timeRunning){
                         restartColorbotons();
-                        //temporizador.restartTime();
+                        temporizador.restartTime();
 
                     }
 
+                    break;
                 case R.id.finish:
                     if (timeRunning) {
 
@@ -161,8 +163,10 @@ public class MainActivity extends AppCompatActivity {
                         msg.show();
 
                     }
+                    break;
                 default:
                     put_toasts(v);
+                    break;
 
             }
         }
