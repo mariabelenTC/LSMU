@@ -28,7 +28,7 @@ public class Temporizador extends CountDownTimer {
         int time = Toast.LENGTH_SHORT;
         Toast msg = Toast.makeText(m, "time finished", time);
         msg.show();
-        //getScore();
+        m.score.getScore();
         m.timeRunning=true;
 
 

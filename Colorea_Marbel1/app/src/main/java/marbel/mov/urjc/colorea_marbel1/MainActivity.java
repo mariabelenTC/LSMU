@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,9 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "variables";
     private static final String TAG1 = "colores";
-    private static final String TAG2 = "puntuacion";
-    private static final String TAG3 = "score_botton";
-    private static final String TAG4 = "rgb_score";
+
 
     public int seekR=0, seekG=0, seekB=0, color_muestra;
     public int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
@@ -46,88 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     public Button boton_Start, boton_Restart, boton_finisht, boton_help;
 
+    public Score score = new Score(MainActivity.this,fila,columna);
 
-    /**
-     * Obtiener la puntuacion de un elemento del color (R,G,B)
-     * @param color_original el color que deberia tener
-     * @param color_asignado el color que asigna el jugador.
-     * @return
-     */
-    private int score(int color_original, int color_asignado){
-        float resta = Math.abs(color_original - color_asignado);
-        Log.v(TAG4, ("resta: " + Float.toString(resta)));
-        float score = (float)((-510/255)* (int)resta +510);
-        //float score = (float) ((-100/255)*resta+100);
-        Log.v(TAG4, ("calcular score: " + Integer.toString((int)score)));
-        return (int)score;
-    }
-    /**
-     * Obtener puntuacion de todos los botones
-     * y calcular si se ha superado el minimo o no. 644267769
-     */
-    private void getScore(){
-        int total_score=0;
-        int score_max=1530*totalBotones;
-        Log.v(TAG2, ("puntuacion Maxima: " + Integer.toString(score_max)));
-
-        int colorR_score, colorG_score, colorB_score, score_boton;
-
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-
-
-                Log.v(TAG3, ("posicion: (" + Integer.toString(i) +
-                        ", " + Integer.toString(j) + ") "));
-
-                int r = Color.red(botonera[i][j].getColor());
-                int g = Color.green(botonera[i][j].getColor());
-                int b = Color.blue(botonera[i][j].getColor());
-                Log.v(TAG3, ("red_o: " + Integer.toString(r) +
-                        " green_o: " + Integer.toString(g) +
-                        " blue_o: " + Integer.toString(b)));
-
-
-                int r_p = Color.red(botonera[i][j].getColor_play());
-                int g_p = Color.green(botonera[i][j].getColor_play());
-                int b_p = Color.blue(botonera[i][j].getColor_play());
-                Log.v(TAG3, ("red_play: " + Integer.toString(r_p) +
-                        " green_play: " + Integer.toString(g_p) +
-                        " blue_play: " + Integer.toString(b_p)));
-
-
-                colorR_score = score(r, r_p);
-                colorG_score = score(g, g_p);
-                colorB_score = score(b, b_p);
-                Log.v(TAG3, ("score_R: " + Integer.toString(colorR_score) +
-                        " score G: " + Integer.toString(colorG_score) +
-                        " score_B: " + Integer.toString(colorB_score)));
-
-                score_boton = colorR_score + colorG_score + colorB_score;
-                Log.v(TAG3, ("score del boton: " + Integer.toString(score_boton)));
-
-                total_score = total_score + score_boton;
-            }
-        }
-        int min=(score_max *8)/9;
-        Log.v(TAG2,("puntuación minima: " + Integer.toString(min)));
-
-        if (total_score>= ((score_max *8)/9)){
-
-            Log.v(TAG2,("has ganado y tu puntación es: " + Integer.toString(total_score)));
-
-            String msg_w = ("::: WINNER :::  score"  + Integer.toString(total_score));
-            Toast msg = Toast.makeText(MainActivity.this, msg_w, time);
-            msg.show();
-
-        }else {
-
-            Log.v(TAG2,("has perdido y tu puntación es: " + Integer.toString(total_score)));
-            
-            String msg_l = ("::: LOSER :::score"  + Integer.toString(total_score));
-            Toast msg = Toast.makeText(MainActivity.this, msg_l, time);
-            msg.show();
-        }
-    }
 
     private View.OnClickListener put_toast = new View.OnClickListener() {
         @Override
@@ -137,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.start:
                     //Log.v(TAG1,("pulsado start"));
                     restartColorbotons();
-                    temporizador=new Temporizador(MainActivity.this,timeleftinMilliseconds,countDownInterval);
+
                     timeRunning=true;
                     temporizador.start();
                     break;
@@ -148,17 +67,13 @@ public class MainActivity extends AppCompatActivity {
                     restartColorbotons();
                     temporizador.restartTime();
                     temporizador.cancel();
-
-
                     break;
                 case R.id.finish:
 
                     if (timeRunning) {
-
                         temporizador.cancel();
-                        getScore();
+                        score.getScore();
                         timeRunning = false;
-
 
                     } else {
                         Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
@@ -166,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     break;
-
                 case R.id.help:
                     if(timeRunning==false){
                         helpColorbotons();
@@ -182,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     put_toasts(v);
                     break;
-
             }
         }
     };
@@ -234,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 
@@ -297,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
         sbG.setOnSeekBarChangeListener(seek);
         sbB.setOnSeekBarChangeListener(seek);
 
+        temporizador=new Temporizador(MainActivity.this,timeleftinMilliseconds,countDownInterval);
 
 
 
@@ -313,16 +226,16 @@ public class MainActivity extends AppCompatActivity {
      * @return
      *
      */
-    private MyBoton[][] addBottons(MyBoton boton, int x, int y, int color_original) {
+    private MyBoton[][] addBottons(MyBoton boton, int x, int y, int color_original, MyBoton[][] bot) {
 
         boton.setPos_x(x);
         boton.setPos_y(y);
         boton.setColor(color_original);
         boton.setColor_play(-1);
-        botonera[x][y]=boton;
+        bot[x][y]=boton;
 
         Log.v(TAG1,("x:"+ Integer.toString(x)+ " y: " + Integer.toString(y)));
-        return botonera;
+        return bot;
 
     }
     /**
@@ -374,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
                 b.setOnClickListener(put_toast);
 
                 // Guardar botones en el Array botonera;
-                botonera= this.addBottons(b,i, j, color_original);
+                botonera= this.addBottons(b,i, j, color_original,botonera);
 
                 //Añade el botón al GridLayout
                 gridLayout.addView(b, indice);
@@ -403,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
      * @param bm Bitmap de la imagen
      * @return
      */
+
     private GridLayout getDefaultGridLayout(Bitmap bm) {
         GridLayout gridLayout = new GridLayout(this);
 
@@ -410,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
         gridLayout.setRowCount(bm.getHeight());
         gridLayout.setColumnCount(bm.getWidth());
 
-        gridLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        gridLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
         return gridLayout;
