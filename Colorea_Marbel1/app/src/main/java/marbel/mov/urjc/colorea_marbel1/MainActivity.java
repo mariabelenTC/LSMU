@@ -35,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
     public TextView countadown_Text;
     public boolean  timeRunning=false;
-    public CountDownTimer countDownTimer;
+
     public int time = Toast.LENGTH_SHORT;
 
     public   int totalBotones;
     public   int fila=0, columna=0;
+
     public   Temporizador temporizador;
     public MyBoton[][] botonera;
 
@@ -144,19 +145,20 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.restart:
                     //Log.v(TAG1, ("pulsar restart"));
 
-                    if(timeRunning){
-                        restartColorbotons();
-                        temporizador.restartTime();
+                    restartColorbotons();
+                    temporizador.restartTime();
+                    temporizador.cancel();
 
-                    }
 
                     break;
                 case R.id.finish:
+
                     if (timeRunning) {
 
-                        //temporizador.cancel();
-                        //getScore();
+                        temporizador.cancel();
+                        getScore();
                         timeRunning = false;
+
 
                     } else {
                         Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
@@ -164,6 +166,19 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     break;
+
+                case R.id.help:
+                    if(timeRunning==false){
+                        helpColorbotons();
+                        Toast msg = Toast.makeText(MainActivity.this, "help", time);
+                        msg.show();
+
+                    }else{
+                        Toast msg = Toast.makeText(MainActivity.this, "not allowed", time);
+                        msg.show();
+                    }
+                    break;
+
                 default:
                     put_toasts(v);
                     break;
@@ -195,51 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    /*
-    private void startTime(){
-        countDownTimer = new CountDownTimer(timeleftinMilliseconds,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                timeleftinMilliseconds=millisUntilFinished;
-                updateTimer();
-
-            }
-
-            @Override
-            public void onFinish() {
-                timeRunning=false;
-                int time = Toast.LENGTH_SHORT;
-                Toast msg = Toast.makeText(MainActivity.this, "time finished", time);
-                msg.show();
-                getScore();
-
-
-            }
-        }.start();
-        timeRunning=true;
-    }
-    private void restartTime(){
-        timeleftinMilliseconds=tiempo;
-        if(timeRunning){
-            timeRunning=false;
-            countDownTimer.cancel();
-            updateTimer();
-        }
-
-    }
-    private void updateTimer(){
-        int minutes=(int) timeleftinMilliseconds/60000;
-        int seconds=(int) timeleftinMilliseconds % 60000/1000;
-        String timelefText;
-        timelefText = "" + minutes;
-        timelefText+=":";
-        if (seconds<2) timelefText +="0";
-        timelefText+=seconds;
-        countadown_Text.setText(timelefText);
-    }
-
-     */
-
+    
 
     private void put_toasts(View v){
         MyBoton b= (MyBoton) v;
