@@ -16,6 +16,8 @@ public class DimensionesPantalla {
     }
 
 
+
+
     /**
      * Construye un GridLayout cuyo tamaño viene dado por el de una imagen, en píxeles.
      * @param bm Bitmap de la imagen
