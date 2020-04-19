@@ -1,7 +1,9 @@
 package marbel.mov.urjc.colorea_marbel1;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 
 public class MyBoton extends Button {
@@ -40,6 +42,25 @@ public class MyBoton extends Button {
     }
     public int getColor_play() { return this.color_play; }
     public void setColor_play(int color_play) { this.color_play = color_play; }
+
+    /**
+     * Construye un botón cuyo tamaño viene dado por el de la pantalla y el de una imagen,
+     * ambos en píxeles.
+     * @param dispDimensions Dimensiones de la pantalla
+     * @param bm Bitmap de la imagen
+     * @return
+     */
+    public static MyBoton getDefaultButton(int[] dispDimensions, Bitmap bm, MainActivity m) {
+        int[] buttonDimensions = new int[]{ dispDimensions[0]/ (bm.getHeight()*4), dispDimensions[1]/ (bm.getWidth()*2)};
+        MyBoton b = new MyBoton(m);
+        b.setMinHeight(0);
+        b.setMinWidth(0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(buttonDimensions[1], buttonDimensions[0]);
+        params.setMargins(1, 1, 1, 1);
+        b.setLayoutParams(params);
+
+        return b;
+    }
 
 
 

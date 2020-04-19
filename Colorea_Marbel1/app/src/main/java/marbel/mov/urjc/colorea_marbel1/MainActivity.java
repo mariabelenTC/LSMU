@@ -1,19 +1,13 @@
 package marbel.mov.urjc.colorea_marbel1;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -26,27 +20,20 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "variables";
     private static final String TAG1 = "colores";
-
-
     public int seekR=0, seekG=0, seekB=0, color_muestra;
     public int tiempo=240000; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
     public long timeleftinMilliseconds=tiempo, countDownInterval=1000;
-
     public TextView countadown_Text;
     public boolean  timeRunning=false;
-
     public int time = Toast.LENGTH_SHORT;
-
     public   int totalBotones;
     public   int fila=0, columna=0;
-
     public   Temporizador temporizador;
     public MyBoton[][] botonera;
-
     public Button boton_Start, boton_Restart, boton_finisht, boton_help;
-
     public Score score = new Score(MainActivity.this);
-
+    public Botonera bot=new Botonera(MainActivity.this);
+    public  DimensionesPantalla dimp=new DimensionesPantalla(MainActivity.this);
 
     private View.OnClickListener put_toast = new View.OnClickListener() {
         @Override
@@ -55,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         switch (v.getId()){
             case R.id.start:
                 //Log.v(TAG1,("pulsado start"));
-                restartColorbotons();
+                bot.restartColorbotons();
 
                 timeRunning=true;
                 temporizador.start();
@@ -64,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.restart:
                 //Log.v(TAG1, ("pulsar restart"));
 
-                restartColorbotons();
+                bot.restartColorbotons();
                 temporizador.restartTime();
                 temporizador.cancel();
                 break;
@@ -83,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.help:
                 if(timeRunning==false){
-                    helpColorbotons();
+                    bot.helpColorbotons();
                     Toast msg = Toast.makeText(MainActivity.this, "help", time);
                     msg.show();
 
@@ -101,31 +88,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    private void restartColorbotons(){
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                //Asigna al botón el color blanco
-                int color = Color.rgb(255, 255, 255);
-                botonera[i][j].setBackground(new ColorDrawable(color));
-                botonera[i][j].setColor_play(color);
-            }
-        }
-
-    }
-    private void helpColorbotons(){
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                //Asigna al botón el color blanco
-                int color =botonera[i][j].getColor();
-                botonera[i][j].setBackground(new ColorDrawable(color));
-            }
-        }
 
 
-    }
-    
-
-    private void put_toasts(View v){
+    public void put_toasts(View v){
         MyBoton b= (MyBoton) v;
 
         int time = Toast.LENGTH_SHORT;
@@ -186,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout parentLayout = findViewById(R.id.botonera);
 
         // Layout hijo (botonera)
-        GridLayout gridLayout = this.getDefaultGridLayout(bm);
+        GridLayout gridLayout = dimp.getDefaultGridLayout(bm);
 
         this.setGridLayoutButtons(gridLayout, bm);
 
@@ -214,36 +179,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-    /**
-     * Añade Myboton a un arraybidimensional.
-     * @param boton boton de tipo MyBoton que quiero guardar
-     * @param x fila
-     * @param y columna
-     * @param color_original color del pixel que deberia tener.
-     * @return
-     *
-     */
-    private MyBoton[][] addBottons(MyBoton boton, int x, int y, int color_original, MyBoton[][] bot) {
-
-        boton.setPos_x(x);
-        boton.setPos_y(y);
-        boton.setColor(color_original);
-        boton.setColor_play(-1);
-        bot[x][y]=boton;
-
-        Log.v(TAG1,("x:"+ Integer.toString(x)+ " y: " + Integer.toString(y)));
-        return bot;
-
-    }
     /**
      * Añade botones a un gridLayout con los colores de una imagen.
      * @param gridLayout GridLayout
      * @param bm Bitmap de la imagen
      */
-    private void setGridLayoutButtons(GridLayout gridLayout, Bitmap bm) {
+    public void setGridLayoutButtons(GridLayout gridLayout, Bitmap bm) {
         int pixel = 0;
         int totalPixels = bm.getHeight() * bm.getWidth();
 
@@ -261,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         int indice = 0;
         for(int i = 0; i < bm.getHeight(); i++){
             for(int j =0; j < bm.getWidth(); j++){
-                b = (MyBoton) this.getDefaultButton(this.getDisplayDimensions(), bm);
+                b = (MyBoton) MyBoton.getDefaultButton(dimp.getDisplayDimensions(), bm, MainActivity.this);
 
                 //Entero que representa el color del píxel del array de píxeles
                 pixel = pixels[indice];
@@ -287,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 b.setOnClickListener(put_toast);
 
                 // Guardar botones en el Array botonera;
-                botonera= this.addBottons(b,i, j, color_original,botonera);
+                botonera= bot.addBottons(b,i, j, color_original,botonera);
 
                 //Añade el botón al GridLayout
                 gridLayout.addView(b, indice);
@@ -311,54 +252,9 @@ public class MainActivity extends AppCompatActivity {
          */
     }
 
-    /**
-     * Construye un GridLayout cuyo tamaño viene dado por el de una imagen, en píxeles.
-     * @param bm Bitmap de la imagen
-     * @return
-     */
-
-    private GridLayout getDefaultGridLayout(Bitmap bm) {
-        GridLayout gridLayout = new GridLayout(this);
-
-        gridLayout.setOrientation(GridLayout.HORIZONTAL);
-        gridLayout.setRowCount(bm.getHeight());
-        gridLayout.setColumnCount(bm.getWidth());
-
-        gridLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
 
-        return gridLayout;
-    }
 
-    /**
-     * Construye un botón cuyo tamaño viene dado por el de la pantalla y el de una imagen,
-     * ambos en píxeles.
-     * @param dispDimensions Dimensiones de la pantalla
-     * @param bm Bitmap de la imagen
-     * @return
-     */
-    private Button getDefaultButton(int[] dispDimensions, Bitmap bm) {
-        int[] buttonDimensions = new int[]{ dispDimensions[0]/ (bm.getHeight()*4), dispDimensions[1]/ (bm.getWidth()*2)};
-        MyBoton b = new MyBoton(this);
-        b.setMinHeight(0);
-        b.setMinWidth(0);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(buttonDimensions[1], buttonDimensions[0]);
-        params.setMargins(1, 1, 1, 1);
-        b.setLayoutParams(params);
-
-        return b;
-    }
-
-    /**
-     * Obtener dimensiones de la pantalla.
-     * @return
-     */
-    private int[] getDisplayDimensions() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        return new int[]{displayMetrics.heightPixels, displayMetrics.widthPixels};
-    }
 
 
 }
