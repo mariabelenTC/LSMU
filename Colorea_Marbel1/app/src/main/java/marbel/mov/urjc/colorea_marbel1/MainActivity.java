@@ -45,58 +45,58 @@ public class MainActivity extends AppCompatActivity {
 
     public Button boton_Start, boton_Restart, boton_finisht, boton_help;
 
-    public Score score = new Score(MainActivity.this,fila,columna);
+    public Score score = new Score(MainActivity.this);
 
 
     private View.OnClickListener put_toast = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-            switch (v.getId()){
-                case R.id.start:
-                    //Log.v(TAG1,("pulsado start"));
-                    restartColorbotons();
+        switch (v.getId()){
+            case R.id.start:
+                //Log.v(TAG1,("pulsado start"));
+                restartColorbotons();
 
-                    timeRunning=true;
-                    temporizador.start();
-                    break;
+                timeRunning=true;
+                temporizador.start();
+                break;
 
-                case R.id.restart:
-                    //Log.v(TAG1, ("pulsar restart"));
+            case R.id.restart:
+                //Log.v(TAG1, ("pulsar restart"));
 
-                    restartColorbotons();
-                    temporizador.restartTime();
+                restartColorbotons();
+                temporizador.restartTime();
+                temporizador.cancel();
+                break;
+            case R.id.finish:
+
+                if (timeRunning) {
                     temporizador.cancel();
-                    break;
-                case R.id.finish:
+                    score.getScore();
+                    timeRunning = false;
 
-                    if (timeRunning) {
-                        temporizador.cancel();
-                        score.getScore();
-                        timeRunning = false;
+                } else {
+                    Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
+                    msg.show();
 
-                    } else {
-                        Toast msg = Toast.makeText(MainActivity.this, "press START to play the game", time);
-                        msg.show();
+                }
+                break;
+            case R.id.help:
+                if(timeRunning==false){
+                    helpColorbotons();
+                    Toast msg = Toast.makeText(MainActivity.this, "help", time);
+                    msg.show();
 
-                    }
-                    break;
-                case R.id.help:
-                    if(timeRunning==false){
-                        helpColorbotons();
-                        Toast msg = Toast.makeText(MainActivity.this, "help", time);
-                        msg.show();
+                }else{
+                    Toast msg = Toast.makeText(MainActivity.this, "not allowed", time);
+                    msg.show();
+                }
+                break;
 
-                    }else{
-                        Toast msg = Toast.makeText(MainActivity.this, "not allowed", time);
-                        msg.show();
-                    }
-                    break;
-
-                default:
-                    put_toasts(v);
-                    break;
-            }
+            default:
+                put_toasts(v);
+                break;
+        }
         }
     };
 

@@ -9,12 +9,15 @@ public class Score {
     private static final String TAG3 = "score_botton";
     private static final String TAG4 = "rgb_score";
     MainActivity m;
-    private int fila, columna;
-    public Score(MainActivity mainWin, int f, int c){
+
+    private MyBoton[][] botonera;
+
+
+
+    public Score(MainActivity mainWin){
 
         m=mainWin;
-        fila=f;
-        columna=c;
+
     }
 
     /**
@@ -26,10 +29,12 @@ public class Score {
     public int score(int color_original, int color_asignado){
         float resta = Math.abs(color_original - color_asignado);
         Log.v(TAG4, ("resta: " + Float.toString(resta)));
+
         float score = (float)((-510/255)* (int)resta +510);
         //float score = (float) ((-100/255)*resta+100);
         Log.v(TAG4, ("calcular score: " + Integer.toString((int)score)));
         return (int)score;
+
     }
     /**
      * Obtener puntuacion de todos los botones
@@ -42,9 +47,8 @@ public class Score {
 
         int colorR_score, colorG_score, colorB_score, score_boton;
 
-        for(int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-
+        for(int i = 0; i < m.fila; i++) {
+            for (int j = 0; j < m.columna; j++) {
 
                 Log.v(TAG3, ("posicion: (" + Integer.toString(i) +
                         ", " + Integer.toString(j) + ") "));
@@ -76,8 +80,10 @@ public class Score {
                 Log.v(TAG3, ("score del boton: " + Integer.toString(score_boton)));
 
                 total_score = total_score + score_boton;
+
             }
         }
+
         int min=(score_max *8)/9;
         Log.v(TAG2,("puntuación minima: " + Integer.toString(min)));
 
