@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#e1bee7"
-    tools:context=".MainActivity">
+    tools:context=".Dibujar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,24 +49,17 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/imagen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="172dp"
-            android:layout_marginLeft="9dp"
-            app:srcCompat="@drawable/mario_final5finalfinal" />
 
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/botonera"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#efccf9"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -119,27 +110,27 @@
             android:id="@+id/RedSeekBar"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#e57373"
             android:max="255"
-            android:thumbTint="#212121" />
+            android:thumbTint="#e57373" />
 
         <SeekBar
             android:id="@+id/GreenSeekBar"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#9ccc65"
             android:max="255"
-            android:thumbTint="#212121" />
+            android:thumbTint="#9ccc65" />
 
         <SeekBar
             android:id="@+id/BlueSeekBar"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#42a5f5"
             android:max="255"
-            android:thumbTint="#212121" />
+            android:thumbTint="#42a5f5" />
 
     </LinearLayout>
+
+
+
 
 
 </LinearLayout>

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public  DimensionesPantalla dimp=new DimensionesPantalla(MainActivity.this);
 
     public OnClickListener put_toast = new OnClickListener(MainActivity.this);
-
+    public boolean ganador =false;
 
 
     @Override
