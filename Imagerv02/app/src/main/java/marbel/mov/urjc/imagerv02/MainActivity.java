@@ -36,13 +36,12 @@ public class MainActivity extends AppCompatActivity {
         btn_empezar=findViewById(R.id.btn_empezar);
 
         campoUsuario= (EditText) findViewById(R.id.tv_usuario);
-        campoPassword= (EditText) findViewById(R.id.tv_password);
 
 
-        changeRegistro= new Change_Activity(MainActivity.this,"aRegistro");
+
+        changeRegistro= new Change_Activity(MainActivity.this);
         tv_registrar.setOnClickListener(changeRegistro);
 
-        //changeMenu= new Change_Activity(MainActivity.this,"aMenu");
 
 
         conn =new ConnexionSQLiteHelper(this, "bd usuarios",null,1);

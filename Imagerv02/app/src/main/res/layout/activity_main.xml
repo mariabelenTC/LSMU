@@ -28,18 +28,7 @@
             android:textColorHint="#000"
             android:inputType="text"
             />
-        <EditText
-            android:id="@+id/tv_password"
-            android:layout_width="200dp"
-            android:outlineSpotShadowColor="#0000"
-            android:backgroundTint="#000"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:gravity="center"
-            android:hint="contraseña"
-            android:textColorHint="#000"
-            android:inputType="textPassword"
-            />
+
         <Button
             android:id="@+id/btn_empezar"
             android:onClick="onClick"

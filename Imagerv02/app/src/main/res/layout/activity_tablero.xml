@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/layout"
-    tools:context=".Dibujar">
+    tools:context=".Tablero">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -134,6 +134,11 @@
             android:thumbTint="#42a5f5" />
 
     </LinearLayout>
+
+
+
+
+
 
 
 </LinearLayout>

@@ -20,6 +20,8 @@ public class Registro extends AppCompatActivity {
     Button aceptRegistro;
     Intent intchange;
 
+
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
