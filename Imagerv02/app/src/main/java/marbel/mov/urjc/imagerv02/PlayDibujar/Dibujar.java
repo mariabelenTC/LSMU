@@ -1,4 +1,4 @@
-package marbel.mov.urjc.imagerv02;
+package marbel.mov.urjc.imagerv02.PlayDibujar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,51 +7,64 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import java.util.List;
-
-import marbel.mov.urjc.imagerv02.PlayColorea.*;
-
+import android.widget.Toast;
+import marbel.mov.urjc.imagerv02.R;
 
 public class Dibujar extends AppCompatActivity {
-    private static final String TAG = "xx";
     private Bundle bundle;
-    private Button boton_Start, boton_Restart, boton_finisht, boton_help,muestra;
-    private TextView Texto_contador;
+    private static final String TAG = "variables";
+    private static final String TAG1 = "colores";
+    public int seekR=0, seekG=0, seekB=0, color_muestra;
+    public int tiempo; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
+    public long timeleftinMilliseconds, countDownInterval=1000;
+    public TextView countadown_Text;
+    public boolean  timeRunning=false;
+    public int time = Toast.LENGTH_SHORT;
     private ImageView ImagenMuestra;
     private Bitmap bm;
-    private Integer fila,columna;
-    private Botonera myBotonera;
-    private MyBoton[][] botonera;
-    private List<Integer> seekList;
-    public int seekR=0, seekG=0, seekB=0, color_muestra;
+    public int totalBotones;
+    public int fila=0, columna=0;
+    public Temporizador temporizador;
+    public MyBoton[][] botonera;
+    public Button boton_Start, boton_Restart, boton_finisht, boton_help,muestra;
+    public Score score = new Score(this);
+    public Botonera bot=new Botonera(this);
+    public DimensionesPantalla dimp=new DimensionesPantalla(this);
 
-
+    public OnClickListener put_toast = new OnClickListener(this);
+    public boolean ganador =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dibujar);
+        setContentView(R.layout.activity_dibujar2);
 
         //Datos recibidos del Activity Dificultad
         bundle=getIntent().getExtras();
 
-        //Botones de mi Actividad
-        Texto_contador=findViewById(R.id.countdown_text);
+        // Temporizador:
+
+        countadown_Text=findViewById(R.id.countdown_text);
         boton_Start=findViewById(R.id.start);
         boton_Restart=findViewById(R.id.restart);
         boton_finisht=findViewById(R.id.finish);
         boton_help=findViewById(R.id.help);
-        ImagenMuestra=findViewById(R.id.imageView);
         muestra= (Button) findViewById(R.id.muestra_color);
+        ImagenMuestra=findViewById(R.id.imageView);
+        boton_finisht.setOnClickListener(put_toast);
+        boton_Start.setOnClickListener(put_toast);
+        boton_Restart.setOnClickListener(put_toast);
+        boton_help.setOnClickListener(put_toast);
+
+
+
 
         // Añade los tres seekbar
         Colores seek = new Colores(this,muestra);
@@ -76,26 +89,32 @@ public class Dibujar extends AppCompatActivity {
             switch (nivel){
                 case 0:
                     Log.v(TAG, ("nivel 0"));
+                    tiempo=60*1000;
+                    timeleftinMilliseconds=tiempo;
                     ConstruirDiseño(R.drawable.cuatrocolores,R.drawable.cuatrocolores_r,"01:00" );
 
 
                     break;
                 case 1:
                     Log.v(TAG, ("nivel 1"));
+                    tiempo=4*60*1000;
+                    timeleftinMilliseconds=tiempo;
                     ConstruirDiseño(R.drawable.mario_final5finalfinal,R.drawable.mario_final2min,"04:00" );
 
                     break;
                 case 2:
                     Log.v(TAG, ("nivel 2"));
+                    tiempo=7*60*1000;
+                    timeleftinMilliseconds=tiempo;
                     ConstruirDiseño(R.drawable.pikamuestra,R.drawable.pikachupixel,"07:00" );
 
                     break;
 
             }
         }
+        temporizador=new Temporizador(this,timeleftinMilliseconds,countDownInterval);
 
     }
-
     private void ConstruirDiseño(Integer imgMuestra, Integer imgPixel,String tiempo){
         BitmapFactory.Options options;
         LinearLayout parentLayout;
@@ -103,20 +122,22 @@ public class Dibujar extends AppCompatActivity {
 
         //Imagen
         ImagenMuestra.setImageResource(imgMuestra);
-        Texto_contador.setText(tiempo);
+        countadown_Text.setText(tiempo);
 
         //Botonera
         options= new BitmapFactory.Options();
         options.inScaled = false;
         bm = BitmapFactory.decodeResource(getResources(), imgPixel, options);
-        myBotonera= new Botonera(this);
-        myBotonera.setFila(bm.getHeight());
-        myBotonera.setColumna(bm.getWidth());
+        fila=bm.getHeight();
+        columna=bm.getWidth();
 
+        botonera = new MyBoton[fila][columna];
 
-        parentLayout = (LinearLayout) findViewById(R.id.botonera);
+        // Layout padre
+        parentLayout = findViewById(R.id.botonera);
+
         // Layout hijo (botonera)
-        gridLayout = this.getDefaultGridLayout(bm);
+        gridLayout = dimp.getDefaultGridLayout(bm);
 
         this.setGridLayoutButtons(gridLayout, bm);
 
@@ -125,77 +146,56 @@ public class Dibujar extends AppCompatActivity {
 
 
     }
-
-    /**
-     * Construye un GridLayout cuyo tamaño viene dado por el de una imagen, en píxeles.
-     * @param bm Bitmap de la imagen
-     * @return
-     */
-
-    public GridLayout getDefaultGridLayout(Bitmap bm) {
-        GridLayout gridLayout = new GridLayout(this);
-
-        gridLayout.setOrientation(GridLayout.HORIZONTAL);
-        gridLayout.setRowCount(bm.getHeight());
-        gridLayout.setColumnCount(bm.getWidth());
-
-        gridLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-
-        return gridLayout;
-    }
-
-
-
-    /**
-     * Obtener dimensiones de la pantalla.
-     * @return
-     */
-    public int[] getDisplayDimensions() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        return new int[]{displayMetrics.heightPixels, displayMetrics.widthPixels};
-    }
-
     /**
      * Añade botones a un gridLayout con los colores de una imagen.
      * @param gridLayout GridLayout
-     *
+     * @param bm Bitmap de la imagen
      */
-    private void setGridLayoutButtons(GridLayout gridLayout,Bitmap bm) {
+    public void setGridLayoutButtons(GridLayout gridLayout, Bitmap bm) {
         int pixel = 0;
         int totalPixels = bm.getHeight() * bm.getWidth();
-        int[] pixels = new int[totalPixels];
 
+        totalBotones=totalPixels;
+
+        int[] pixels = new int[bm.getWidth() * bm.getHeight()];
         MyBoton b = null;
 
         //Inserta los píxeles del Bitmap (imagen) en el array pixels
         bm.getPixels(pixels, 0, bm.getWidth(), 0, 0, bm.getWidth(), bm.getHeight());
+        Log.v(TAG1,("total pixeles:"+ Integer.toString(totalPixels) +
+                " witdth: " + Integer.toString(bm.getWidth()) +
+                " Height: "+ Integer.toString(bm.getHeight())));
 
         int indice = 0;
         for(int i = 0; i < bm.getHeight(); i++){
             for(int j =0; j < bm.getWidth(); j++){
-                b = (MyBoton) this.getDefaultButton(this.getDisplayDimensions(), bm);
+                b = (MyBoton) MyBoton.getDefaultButton(dimp.getDisplayDimensions(), bm, this);
 
                 //Entero que representa el color del píxel del array de píxeles
                 pixel = pixels[indice];
                 String text3= "pixel: " + Integer.toString(pixel);
-
+                Log.v(TAG1, text3);
 
                 //Color a partir del píxel
                 int color_original = Color.rgb(Color.red(pixel), Color.green(pixel), Color.blue(pixel));
+                /*
+                String txt = "int color: " + Integer.toString(pixel);
+                Log.v(TAG1, txt);
 
+                Log.v(TAG1,("red: "+ Integer.toString(Color.red(pixel)) +
+                            " green: " + Integer.toString(Color.green(pixel)) +
+                            " blue: "+ Integer.toString(Color.blue(pixel))));
+
+                 */
                 //Asigna al botón el color blanco
                 int color = Color.rgb(255 ,255,255 );
                 b.setBackground(new ColorDrawable(color));
 
                 //Asignamose el Listener
-                //b.setOnClickListener(put_toast);
-                botonera=new MyBoton[myBotonera.getFila()][myBotonera.getColumna()];
+                b.setOnClickListener(put_toast);
+
                 // Guardar botones en el Array botonera;
-                b.crearMiBoton(i,j,color_original);
-                botonera[i][j]= b;
+                botonera= bot.addBottons(b,i, j, color_original,botonera);
 
                 //Añade el botón al GridLayout
                 gridLayout.addView(b, indice);
@@ -203,27 +203,20 @@ public class Dibujar extends AppCompatActivity {
 
             }
         }
-        myBotonera.setBotonera(botonera);
+        /*
+        int colorboton0 =( (ColorDrawable) gridLayout.getChildAt(0).getBackground()).getColor();
+        Log.v(TAG1, ("boton 0 gridlayout: "+ Integer.toString(colorboton0)));
 
+        int colorboton1 =( (ColorDrawable) gridLayout.getChildAt(1).getBackground()).getColor();
+        Log.v(TAG1, ("boton 1 gridlayout: "+ Integer.toString(colorboton1)));
 
-    }
-    /**
-     * Construye un botón cuyo tamaño viene dado por el de la pantalla y el de una imagen,
-     * ambos en píxeles.
-     * @param dispDimensions Dimensiones de la pantalla
-     * @param bm Bitmap de la imagen
-     * @return
-     */
-    private MyBoton getDefaultButton(int[] dispDimensions, Bitmap bm) {
-        int[] buttonDimensions = new int[]{ dispDimensions[0]/ (bm.getHeight()*4), dispDimensions[1]/ (bm.getWidth()*2)};
-        MyBoton b = new MyBoton(this);
-        b.setMinHeight(0);
-        b.setMinWidth(0);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(buttonDimensions[1], buttonDimensions[0]);
-        params.setMargins(1, 1, 1, 1);
-        b.setLayoutParams(params);
+        int colorboton2 =( (ColorDrawable) gridLayout.getChildAt(2).getBackground()).getColor();
+        Log.v(TAG1, ("boton 2 gridlayout: "+ Integer.toString(colorboton2)));
 
-        return b;
+        int colorboton3 =( (ColorDrawable) gridLayout.getChildAt(3).getBackground()).getColor();
+        Log.v(TAG1, ("boton 3 gridlayout: "+ Integer.toString(colorboton3)));
+
+         */
     }
 
 

@@ -1,14 +1,12 @@
-package marbel.mov.urjc.imagerv02.PlayColorea;
+package marbel.mov.urjc.imagerv02.PlayDibujar;
+
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.SeekBar;
-
-import marbel.mov.urjc.imagerv02.Dibujar;
 import marbel.mov.urjc.imagerv02.R;
-
 
 public class Colores implements SeekBar.OnSeekBarChangeListener {
     Dibujar mainWin;
@@ -17,7 +15,7 @@ public class Colores implements SeekBar.OnSeekBarChangeListener {
     private static final String TAG = "idSeekBar";
     private static final String TAG1 = "seekbar";
 
-    public Colores(Dibujar w, Button muestra){
+    public Colores(Dibujar w,Button muestra){
         mainWin=w;
 
         this.boton_muestra=muestra;

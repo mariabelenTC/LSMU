@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import marbel.mov.urjc.imagerv02.PlayDibujar.Dibujar;
 
 
 class Change_Activity implements View.OnClickListener {
