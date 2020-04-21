@@ -20,7 +20,6 @@
             android:id="@+id/countdown_text"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="04:00"
             android:layout_gravity="center"
             android:background="#450852"
             android:textAlignment="center"

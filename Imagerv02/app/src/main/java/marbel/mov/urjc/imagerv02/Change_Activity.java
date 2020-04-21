@@ -53,7 +53,7 @@ class Change_Activity implements View.OnClickListener {
 
                 break;
             case R.id.BTN_next:
-                if (identificador=="Dibujar"){
+                if (identificador.equals("Dibujar")){
                     intchange =new Intent(mainwin,Dibujar.class);
                 }else{
                     intchange =new Intent(mainwin,Puzzle.class);

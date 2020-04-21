@@ -79,13 +79,11 @@ public class Dificultad extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            //v (View)  es un  ImageButton
+            //v (View)  es un  ImamgeButton
             ImageButton objBoton = (ImageButton) v;
             nivel=v.getId();
             Log.v(TAG, ("nivel al pulsar: "+ Integer.toString(nivel) +" opcion: " + opcion));
-
-            change=new Change_Activity(Dificultad.this,"Dibujar",nivel);
-
+            change=new Change_Activity(Dificultad.this,opcion,nivel);
 
             String text="nivel "+Integer.toString(nivel);
             Toast.makeText(Dificultad.this, text, Toast.LENGTH_SHORT).show();
