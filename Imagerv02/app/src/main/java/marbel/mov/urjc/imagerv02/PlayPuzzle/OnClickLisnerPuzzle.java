@@ -1,6 +1,7 @@
 package marbel.mov.urjc.imagerv02.PlayPuzzle;
 
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
@@ -8,18 +9,21 @@ import android.widget.Toast;
 
 import marbel.mov.urjc.imagerv02.Change_Activity;
 import marbel.mov.urjc.imagerv02.R;
+import marbel.mov.urjc.imagerv02.TopScore;
 
 class OnClickLisnerPuzzle implements View.OnClickListener {
-    private static final String TAG1 = "puzleBotones";
     private int time = Toast.LENGTH_SHORT;
+    private static final String TAG1 = "puzleBotones";
     Puzzle p;
     private int vecesPulsado=0;
+    private Intent intchange;
     private  PiezaBoton b2;
     private int x1=0,y1=0,x2,y2;
     private int color1=0,color2=0;
     private Change_Activity changeTopscore;
     private String nameUser;
 
+    private  ScorePuzzle score;
     public OnClickLisnerPuzzle(Puzzle puzzle, String nameUsuario) {
         p=puzzle;
         nameUser=nameUsuario;
@@ -69,16 +73,33 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.puzzleStart:
-                Log.v(TAG1, ("pulsado start"));
+                //Log.v(TAG1,("pulsado start"));
+
+                p.timeRunning=true;
+                p.temporizador.start();
 
                 break;
             case R.id.puzzleFinish:
-                int score=0;
-                changeTopscore=new Change_Activity(p,nameUser,score);
+                score=new ScorePuzzle(p.botonera,p.fila,p.columna);
 
-                Toast msg = Toast.makeText(p, "press START to play the game", time);
-                msg.show();
+                if (p.timeRunning) {
+                    //consultar();
+                    //actualizarScore();
 
+                    int scor= score.getScore();
+                    changeTopscore=new Change_Activity(p,nameUser,scor);
+                    p.timeRunning = false;
+                    p.temporizador.cancel();
+                    intchange =new Intent(p, TopScore.class);
+                    intchange.putExtra("nombre", nameUser);
+                    intchange.putExtra("score", scor);
+                    p.startActivity(intchange);
+
+                } else {
+                    Toast msg = Toast.makeText(p, "press START to play the game", time);
+                    msg.show();
+
+                }
                 break;
 
             default:

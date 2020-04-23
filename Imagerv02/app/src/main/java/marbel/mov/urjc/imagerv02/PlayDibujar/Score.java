@@ -8,8 +8,8 @@ public class Score {
     private static final String TAG2 = "puntuacion";
     private static final String TAG3 = "score_botton";
     private static final String TAG4 = "rgb_score";
-    Dibujar m;
-
+    private Dibujar m;
+    private int time = Toast.LENGTH_SHORT;
     private MyBoton[][] botonera;
 
 
@@ -93,7 +93,7 @@ public class Score {
             Log.v(TAG2,("has ganado y tu puntación es: " + Integer.toString(total_score)));
 
             String msg_w = ("::: WINNER :::  score"  + Integer.toString(total_score));
-            Toast msg = Toast.makeText(m, msg_w, m.time);
+            Toast msg = Toast.makeText(m, msg_w, time);
             msg.show();
 
         }else {
@@ -101,7 +101,7 @@ public class Score {
             Log.v(TAG2,("has perdido y tu puntación es: " + Integer.toString(total_score)));
 
             String msg_l = ("::: LOSER :::score"  + Integer.toString(total_score));
-            Toast msg = Toast.makeText(m, msg_l, m.time);
+            Toast msg = Toast.makeText(m, msg_l, time);
             msg.show();
         }
         return total_score;

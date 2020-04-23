@@ -26,7 +26,7 @@ public class Dibujar extends AppCompatActivity {
     public long timeleftinMilliseconds, countDownInterval=1000;
     public TextView countadown_Text;
     public boolean  timeRunning=false;
-    public int time = Toast.LENGTH_SHORT;
+
     private ImageView ImagenMuestra;
     private Bitmap bm;
     public int totalBotones;
@@ -58,12 +58,6 @@ public class Dibujar extends AppCompatActivity {
         boton_help=findViewById(R.id.help);
         muestra= (Button) findViewById(R.id.muestra_color);
         ImagenMuestra=findViewById(R.id.imageView);
-
-
-
-
-
-
 
         // Añade los tres seekbar
         Colores seek = new Colores(this,muestra);

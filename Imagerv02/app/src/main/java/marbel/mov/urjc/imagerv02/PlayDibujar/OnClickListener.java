@@ -1,6 +1,5 @@
 package marbel.mov.urjc.imagerv02.PlayDibujar;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import marbel.mov.urjc.imagerv02.Change_Activity;
-import marbel.mov.urjc.imagerv02.ComandosBD.ComandosBD;
 import marbel.mov.urjc.imagerv02.ConnexionSQLiteHelper;
 import marbel.mov.urjc.imagerv02.R;
 import marbel.mov.urjc.imagerv02.TopScore;
@@ -18,6 +16,7 @@ public class OnClickListener implements View.OnClickListener {
     private static final String TAG1 = "colores";
     private Intent intchange;
     ConnexionSQLiteHelper conn;
+    public int time = Toast.LENGTH_SHORT;
     private String name;
     private Change_Activity change;
 
@@ -86,7 +85,7 @@ public class OnClickListener implements View.OnClickListener {
                     m.startActivity(intchange);
 
                 } else {
-                    Toast msg = Toast.makeText(m, "press START to play the game", m.time);
+                    Toast msg = Toast.makeText(m, "press START to play the game", time);
                     msg.show();
 
                 }
@@ -94,11 +93,11 @@ public class OnClickListener implements View.OnClickListener {
             case R.id.help:
                 if(m.timeRunning==false){
                     m.bot.helpColorbotons();
-                    Toast msg = Toast.makeText(m, "help", m.time);
+                    Toast msg = Toast.makeText(m, "help", time);
                     msg.show();
 
                 }else{
-                    Toast msg = Toast.makeText(m, "not allowed", m.time);
+                    Toast msg = Toast.makeText(m, "not allowed", time);
                     msg.show();
                 }
                 break;

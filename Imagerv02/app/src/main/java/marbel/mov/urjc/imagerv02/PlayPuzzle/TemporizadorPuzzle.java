@@ -1,19 +1,17 @@
-package marbel.mov.urjc.imagerv02.PlayDibujar;
+package marbel.mov.urjc.imagerv02.PlayPuzzle;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.os.CountDownTimer;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import marbel.mov.urjc.imagerv02.TopScore;
 
-public class Temporizador extends CountDownTimer {
+public class TemporizadorPuzzle extends CountDownTimer {
     private Intent intchange;
+    private ScorePuzzle puntuacion;
 
-
-    private Dibujar m;
-    private String nameUser;
+    private Puzzle m;
+    private String name;
 
     /**
      * @param millisInFuture    The number of millis in the future from the call
@@ -22,10 +20,10 @@ public class Temporizador extends CountDownTimer {
      * @param countDownInterval The interval along the way to receive
      *                          {@link #onTick(long)} callbacks.
      */
-    public Temporizador(Dibujar main,long millisInFuture, long countDownInterval,String name) {
+    public TemporizadorPuzzle(Puzzle main,long millisInFuture, long countDownInterval,String nam) {
         super(millisInFuture, countDownInterval);
         m=main;
-        this.nameUser=name;
+        this.name=nam;
     }
 
 
@@ -35,12 +33,13 @@ public class Temporizador extends CountDownTimer {
         int time = Toast.LENGTH_SHORT;
         Toast msg = Toast.makeText(m, "time finished", time);
         msg.show();
-        int score= m.score.getScore();
-        m.timeRunning = false;
+        puntuacion=new ScorePuzzle(m.botonera,m.fila,m.columna);
+        int score= puntuacion.getScore();
+
         intchange =new Intent(m, TopScore.class);
-        String juego="dibujar";
-        intchange.putExtra("juego", juego);
-        intchange.putExtra("nombre", nameUser);
+        String juego="puzzle";
+        intchange.putExtra("juego",juego);
+        intchange.putExtra("nombre", name);
         intchange.putExtra("score", score);
         m.startActivity(intchange);
         m.timeRunning=true;
@@ -76,7 +75,7 @@ public class Temporizador extends CountDownTimer {
         timelefText+=":";
         if (seconds<2) timelefText +="0";
         timelefText+=seconds;
-        m.countadown_Text.setText(timelefText);
+        m.puzzleCountadownText.setText(timelefText);
     }
 
 }

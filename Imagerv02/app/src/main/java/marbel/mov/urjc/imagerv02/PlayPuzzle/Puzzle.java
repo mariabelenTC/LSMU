@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.Random;
+
+
 import marbel.mov.urjc.imagerv02.R;
 import static marbel.mov.urjc.imagerv02.PlayPuzzle.PiezaBoton.getDefaultButton;
 
@@ -22,7 +24,7 @@ public class Puzzle extends AppCompatActivity {
     private static final String TAG = "variables";
 
     public Button boton_Start, boton_Restart, boton_finish;
-    public TextView countadown_Text;
+    public TextView  puzzleCountadownText;
     private Bundle bundle;
     private ImageView ImagenMuestra;
     public int tiempo; // tiempo inicial en milisegundos -> 3 minuto = 3*60*1000
@@ -32,16 +34,16 @@ public class Puzzle extends AppCompatActivity {
     private Bitmap bm;
     public PiezaBoton[][] botonera;
     public DimensionesPantalla dimp=new DimensionesPantalla(this);
-
+    public boolean  timeRunning=false;
     private OnClickLisnerPuzzle put_toast;
     private String nameUsuario;
-
+    public TemporizadorPuzzle temporizador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
-        countadown_Text=findViewById(R.id.puzzleContador);
+        puzzleCountadownText=findViewById(R.id.puzzleContador);
         boton_Start=findViewById(R.id.puzzleStart);
         boton_finish=findViewById(R.id.puzzleFinish);
         ImagenMuestra=findViewById(R.id.puzzleMuestra);
@@ -84,7 +86,9 @@ public class Puzzle extends AppCompatActivity {
                     break;
 
             }
+            temporizador=new TemporizadorPuzzle(this,timeleftinMilliseconds,countDownInterval,nameUsuario);
         }
+
     }
     private void ConstruirDiseño(Integer imgMuestra, Integer imgPixel,String tiempo){
         BitmapFactory.Options options;
@@ -93,7 +97,7 @@ public class Puzzle extends AppCompatActivity {
 
         //Imagen
         ImagenMuestra.setImageResource(imgMuestra);
-        countadown_Text.setText(tiempo);
+        puzzleCountadownText.setText(tiempo);
 
        //Botonera
         options= new BitmapFactory.Options();

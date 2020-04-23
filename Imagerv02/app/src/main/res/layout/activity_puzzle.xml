@@ -38,16 +38,6 @@
             android:text="start"
             android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/puzzleRestart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="#A152AA"
-            android:textColor="#FFFFFF"
-            android:text="reset"
-            android:textSize="20dp" />
-
     </LinearLayout>
     <LinearLayout
         android:id="@+id/layoutImagen"

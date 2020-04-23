@@ -7,6 +7,7 @@ import android.view.View;
 import marbel.mov.urjc.imagerv02.PlayDibujar.Dibujar;
 import marbel.mov.urjc.imagerv02.PlayPuzzle.Puzzle;
 
+
 public class Change_Activity implements View.OnClickListener {
     private Activity mainwin;
     private Intent intchange;
@@ -19,7 +20,7 @@ public class Change_Activity implements View.OnClickListener {
         this.mainwin=w;
 
     }
-    public Change_Activity(Activity w, String id, Integer value){
+    Change_Activity(Activity w, String id, Integer value){
         this.mainwin=w;
         this.identificador=id;
         this.valor=value;
