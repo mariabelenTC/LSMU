@@ -5,28 +5,42 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import marbel.mov.urjc.imagerv02.PlayDibujar.Dibujar;
+import marbel.mov.urjc.imagerv02.PlayPuzzle.Puzzle;
 
-
-class Change_Activity implements View.OnClickListener {
+public class Change_Activity implements View.OnClickListener {
     private Activity mainwin;
     private Intent intchange;
     private static final String TAG = "Nivel que elijo";
-    private String identificador;
+    private String identificador,name;
     private Integer valor;
-
+    private String valor2;
 
     Change_Activity(Activity w){
-        mainwin=w;
+        this.mainwin=w;
 
+    }
+    public Change_Activity(Activity w, String id, Integer value){
+        this.mainwin=w;
+        this.identificador=id;
+        this.valor=value;
     }
 
 
-    Change_Activity(Activity w, String id, Integer value){
+    Change_Activity(Activity w, String id, String val){
         mainwin=w;
         identificador=id;
-        valor=value;
+        valor2=val;
 
     }
+
+    Change_Activity(Activity w, String id, Integer value,String name){
+        this.mainwin=w;
+        this.identificador=id;
+        this.valor=value;
+        this.name=name;
+
+    }
+
 
 
     @Override
@@ -45,12 +59,14 @@ class Change_Activity implements View.OnClickListener {
 
                 juego="Dibujar";
                 intchange.putExtra("opcion", juego);
+                intchange.putExtra(identificador, valor2);
 
                 break;
             case R.id.BTN_PuzZle:
                 intchange =new Intent(mainwin,Dificultad.class);
                 juego= "Puzzle";
                 intchange.putExtra("opcion", juego);
+                intchange.putExtra("nombre", valor2);
 
                 break;
             case R.id.BTN_next:
@@ -61,7 +77,13 @@ class Change_Activity implements View.OnClickListener {
                 }
 
                 intchange.putExtra("nivel", valor);
+                intchange.putExtra("nombre", valor2);
                 break;
+            case R.id.puzzleFinish:
+                intchange =new Intent(mainwin,TopScore.class);
+
+                intchange.putExtra("nombre", identificador);
+                intchange.putExtra("score", valor);
 
             default:
                 throw new IllegalStateException("Pasa algo raro");

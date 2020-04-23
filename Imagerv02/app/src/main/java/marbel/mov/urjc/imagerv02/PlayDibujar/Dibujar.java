@@ -37,8 +37,8 @@ public class Dibujar extends AppCompatActivity {
     public Score score = new Score(this);
     public Botonera bot=new Botonera(this);
     public DimensionesPantalla dimp=new DimensionesPantalla(this);
-
-    public OnClickListener put_toast = new OnClickListener(this);
+    private String nameUser;
+    public OnClickListener put_toast;
     public boolean ganador =false;
 
     @Override
@@ -58,10 +58,9 @@ public class Dibujar extends AppCompatActivity {
         boton_help=findViewById(R.id.help);
         muestra= (Button) findViewById(R.id.muestra_color);
         ImagenMuestra=findViewById(R.id.imageView);
-        boton_finisht.setOnClickListener(put_toast);
-        boton_Start.setOnClickListener(put_toast);
-        boton_Restart.setOnClickListener(put_toast);
-        boton_help.setOnClickListener(put_toast);
+
+
+
 
 
 
@@ -83,7 +82,17 @@ public class Dibujar extends AppCompatActivity {
         options.inScaled = false;
 
         if(bundle!=null){
+
             Integer nivel=bundle.getInt("nivel",0);
+            nameUser=bundle.getString("nombre"," ");
+
+            put_toast = new OnClickListener(this,nameUser);
+
+            boton_finisht.setOnClickListener(put_toast);
+            boton_Start.setOnClickListener(put_toast);
+            boton_Restart.setOnClickListener(put_toast);
+            boton_help.setOnClickListener(put_toast);
+
 
             Log.v(TAG, ("nivel: "+ Integer.toString(nivel)));
             switch (nivel){
@@ -112,7 +121,7 @@ public class Dibujar extends AppCompatActivity {
 
             }
         }
-        temporizador=new Temporizador(this,timeleftinMilliseconds,countDownInterval);
+        temporizador=new Temporizador(this,timeleftinMilliseconds,countDownInterval,nameUser);
 
     }
     private void ConstruirDiseño(Integer imgMuestra, Integer imgPixel,String tiempo){

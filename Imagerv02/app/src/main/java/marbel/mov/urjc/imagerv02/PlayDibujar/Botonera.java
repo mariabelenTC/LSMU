@@ -3,6 +3,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 
+
+
 public class Botonera {
     Dibujar m;
     private static final String TAG1 = "colores";
@@ -10,6 +12,7 @@ public class Botonera {
         m=main;
 
     }
+
 
 
     /**

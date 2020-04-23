@@ -12,10 +12,12 @@ public class ListenerNivel implements View.OnClickListener {
     private Change_Activity change;
     private String opcion;
     private Activity main;
+    private String name;
 
-    ListenerNivel(Activity m, String op){
+    ListenerNivel(Activity m, String op, String user){
         this.main=m;
         this.opcion=op;
+        this.name=user;
 
     }
 
@@ -25,7 +27,7 @@ public class ListenerNivel implements View.OnClickListener {
         //v (View)  es un  ImageButton
         ImageButton objBoton = (ImageButton) v;
         nivel=v.getId();
-        change=new Change_Activity(main,opcion,nivel);
+        change=new Change_Activity(main,opcion,nivel,name);
         Log.v(TAG, ("nivel al pulsar: "+ Integer.toString(nivel)));
         String text="nivel "+Integer.toString(nivel);
         Toast.makeText(main, text, Toast.LENGTH_SHORT).show();

@@ -4,6 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PlayPuzzle.Puzzle">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp" >
+
+        <TextView
+            android:id="@+id/puzzleContador"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#450852"
+            android:textAlignment="center"
+            android:textColor="#FFFF"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/puzzleStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="#A152AA"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:text="start"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/puzzleRestart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="#A152AA"
+            android:textColor="#FFFFFF"
+            android:text="reset"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutImagen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/puzzleMuestra"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutBotonera"
+        android:layout_width="match_parent"
+        android:layout_height="319dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center">
+
+
+
+        <Button
+            android:id="@+id/puzzleFinish"
+            android:layout_width="104dp"
+            android:layout_height="69dp"
+            android:text="finish"
+            android:textColor="#FFFF"
+            android:textSize="15dp"
+            android:background="#7316A2" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

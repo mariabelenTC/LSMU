@@ -1,14 +1,19 @@
 package marbel.mov.urjc.imagerv02.PlayDibujar;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import marbel.mov.urjc.imagerv02.TopScore;
+
 public class Temporizador extends CountDownTimer {
+    private Intent intchange;
 
 
     Dibujar m;
+    private String name;
 
     /**
      * @param millisInFuture    The number of millis in the future from the call
@@ -17,7 +22,7 @@ public class Temporizador extends CountDownTimer {
      * @param countDownInterval The interval along the way to receive
      *                          {@link #onTick(long)} callbacks.
      */
-    public Temporizador(Dibujar main,long millisInFuture, long countDownInterval) {
+    public Temporizador(Dibujar main,long millisInFuture, long countDownInterval,String name) {
         super(millisInFuture, countDownInterval);
         m=main;
     }
@@ -29,7 +34,13 @@ public class Temporizador extends CountDownTimer {
         int time = Toast.LENGTH_SHORT;
         Toast msg = Toast.makeText(m, "time finished", time);
         msg.show();
-        m.score.getScore();
+        int score= m.score.getScore();
+        m.timeRunning = false;
+        intchange =new Intent(m, TopScore.class);
+
+        intchange.putExtra("nombre", name);
+        intchange.putExtra("score", score);
+        m.startActivity(intchange);
         m.timeRunning=true;
 
 

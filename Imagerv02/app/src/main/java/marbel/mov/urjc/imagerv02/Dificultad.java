@@ -19,11 +19,11 @@ public class Dificultad extends AppCompatActivity {
     LinearLayout contenedor;
     private Intent intchange;
     private ImageButton next;
-    private String opcion;
+    private String opcion,nombreUser;
     private Change_Activity change,change2;
     private Integer nivel=0;
 
-    List<Integer> mImagesIds= Arrays.asList(R.drawable.pincel1,R.drawable.puzzle1,R.drawable.pincel1);
+    List<Integer> mImagesIds= Arrays.asList(R.drawable.cuatrocoloresboton,R.drawable.marioboton,R.drawable.pikachuboton);
 
 
     @Override
@@ -37,7 +37,7 @@ public class Dificultad extends AppCompatActivity {
 
         if(bundle!=null){
             opcion=bundle.getString("opcion"," ");
-
+            nombreUser=bundle.getString("nombre"," ");
             Log.v(TAG, ("opcion: "+ opcion));
             switch (opcion){
                 case "Dibujar":
@@ -83,7 +83,7 @@ public class Dificultad extends AppCompatActivity {
             ImageButton objBoton = (ImageButton) v;
             nivel=v.getId();
             Log.v(TAG, ("nivel al pulsar: "+ Integer.toString(nivel) +" opcion: " + opcion));
-            change=new Change_Activity(Dificultad.this,opcion,nivel);
+            change=new Change_Activity(Dificultad.this,opcion,nivel,nombreUser);
 
             String text="nivel "+Integer.toString(nivel);
             Toast.makeText(Dificultad.this, text, Toast.LENGTH_SHORT).show();

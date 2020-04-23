@@ -40,7 +40,7 @@ public class Score {
      * Obtener puntuacion de todos los botones
      * y calcular si se ha superado el minimo o no. 644267769
      */
-    public void getScore(){
+    public int getScore(){
         int total_score=0;
         int score_max=1530*m.totalBotones;
         Log.v(TAG2, ("puntuacion Maxima: " + Integer.toString(score_max)));
@@ -81,6 +81,7 @@ public class Score {
 
                 total_score = total_score + score_boton;
 
+
             }
         }
 
@@ -103,5 +104,6 @@ public class Score {
             Toast msg = Toast.makeText(m, msg_l, m.time);
             msg.show();
         }
+        return total_score;
     }
 }

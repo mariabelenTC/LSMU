@@ -1,17 +1,30 @@
 package marbel.mov.urjc.imagerv02.PlayDibujar;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import marbel.mov.urjc.imagerv02.Change_Activity;
+import marbel.mov.urjc.imagerv02.ComandosBD.ComandosBD;
+import marbel.mov.urjc.imagerv02.ConnexionSQLiteHelper;
 import marbel.mov.urjc.imagerv02.R;
+import marbel.mov.urjc.imagerv02.TopScore;
 
 public class OnClickListener implements View.OnClickListener {
     Dibujar m;
     private static final String TAG1 = "colores";
+    private Intent intchange;
+    ConnexionSQLiteHelper conn;
+    private String name;
+    private Change_Activity change;
 
-    public OnClickListener(Dibujar main){
+
+    public OnClickListener(Dibujar main ,String name){
         m=main;
+        this.name=name;
 
     }
 
@@ -61,9 +74,16 @@ public class OnClickListener implements View.OnClickListener {
             case R.id.finish:
 
                 if (m.timeRunning) {
+                    //consultar();
+                    //actualizarScore();
                     m.temporizador.cancel();
-                    m.score.getScore();
+                    int score= m.score.getScore();
                     m.timeRunning = false;
+                    intchange =new Intent(m, TopScore.class);
+
+                    intchange.putExtra("nombre", name);
+                    intchange.putExtra("score", score);
+                    m.startActivity(intchange);
 
                 } else {
                     Toast msg = Toast.makeText(m, "press START to play the game", m.time);
@@ -87,6 +107,14 @@ public class OnClickListener implements View.OnClickListener {
                 put_toasts(v);
                 break;
         }
+
+
     }
+
+
+
+
+
+
 
 }
