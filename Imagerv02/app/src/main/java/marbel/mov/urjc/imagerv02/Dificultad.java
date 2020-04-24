@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Dificultad extends AppCompatActivity {
-    private static final String TAG = "condicion";
+    private static final String TAG = "NAME";
     Bundle bundle;
     LinearLayout contenedor;
     private Intent intchange;
@@ -36,9 +36,9 @@ public class Dificultad extends AppCompatActivity {
         bundle=getIntent().getExtras();
 
         if(bundle!=null){
-            opcion=bundle.getString("opcion"," ");
+            opcion=bundle.getString("modo"," ");
             nombreUser=bundle.getString("nombre"," ");
-            Log.v(TAG, ("opcion: "+ opcion));
+            Log.v(TAG, ("nombre: "+ opcion));
             switch (opcion){
                 case "Dibujar":
                     Log.v(TAG, ("hoallal"));
@@ -83,7 +83,7 @@ public class Dificultad extends AppCompatActivity {
             ImageButton objBoton = (ImageButton) v;
             nivel=v.getId();
             Log.v(TAG, ("nivel al pulsar: "+ Integer.toString(nivel) +" opcion: " + opcion));
-            change=new Change_Activity(Dificultad.this,opcion,nivel,nombreUser);
+            change=new Change_Activity(Dificultad.this,nombreUser,opcion,nivel);
 
             String text="nivel "+Integer.toString(nivel);
             Toast.makeText(Dificultad.this, text, Toast.LENGTH_SHORT).show();

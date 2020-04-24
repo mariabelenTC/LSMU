@@ -6,7 +6,7 @@ import android.util.Log;
 
 
 public class Botonera {
-    Dibujar m;
+    private Dibujar m;
     private static final String TAG1 = "colores";
     public Botonera(Dibujar main){
         m=main;

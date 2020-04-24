@@ -165,9 +165,6 @@ public class Dibujar extends AppCompatActivity {
 
         //Inserta los píxeles del Bitmap (imagen) en el array pixels
         bm.getPixels(pixels, 0, bm.getWidth(), 0, 0, bm.getWidth(), bm.getHeight());
-        Log.v(TAG1,("total pixeles:"+ Integer.toString(totalPixels) +
-                " witdth: " + Integer.toString(bm.getWidth()) +
-                " Height: "+ Integer.toString(bm.getHeight())));
 
         int indice = 0;
         for(int i = 0; i < bm.getHeight(); i++){
@@ -181,15 +178,7 @@ public class Dibujar extends AppCompatActivity {
 
                 //Color a partir del píxel
                 int color_original = Color.rgb(Color.red(pixel), Color.green(pixel), Color.blue(pixel));
-                /*
-                String txt = "int color: " + Integer.toString(pixel);
-                Log.v(TAG1, txt);
 
-                Log.v(TAG1,("red: "+ Integer.toString(Color.red(pixel)) +
-                            " green: " + Integer.toString(Color.green(pixel)) +
-                            " blue: "+ Integer.toString(Color.blue(pixel))));
-
-                 */
                 //Asigna al botón el color blanco
                 int color = Color.rgb(255 ,255,255 );
                 b.setBackground(new ColorDrawable(color));
@@ -206,20 +195,7 @@ public class Dibujar extends AppCompatActivity {
 
             }
         }
-        /*
-        int colorboton0 =( (ColorDrawable) gridLayout.getChildAt(0).getBackground()).getColor();
-        Log.v(TAG1, ("boton 0 gridlayout: "+ Integer.toString(colorboton0)));
 
-        int colorboton1 =( (ColorDrawable) gridLayout.getChildAt(1).getBackground()).getColor();
-        Log.v(TAG1, ("boton 1 gridlayout: "+ Integer.toString(colorboton1)));
-
-        int colorboton2 =( (ColorDrawable) gridLayout.getChildAt(2).getBackground()).getColor();
-        Log.v(TAG1, ("boton 2 gridlayout: "+ Integer.toString(colorboton2)));
-
-        int colorboton3 =( (ColorDrawable) gridLayout.getChildAt(3).getBackground()).getColor();
-        Log.v(TAG1, ("boton 3 gridlayout: "+ Integer.toString(colorboton3)));
-
-         */
     }
 
 

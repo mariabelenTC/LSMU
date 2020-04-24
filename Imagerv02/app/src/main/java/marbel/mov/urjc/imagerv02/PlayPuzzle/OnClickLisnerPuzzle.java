@@ -94,7 +94,7 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
                     //actualizarScore();
 
                     int scor= score.getScore();
-                    changeTopscore=new Change_Activity(p,nameUser,scor);
+                    changeTopscore=new Change_Activity(p,nameUser," ",scor);
                     p.timeRunning = false;
                     p.temporizador.cancel();
                     intchange =new Intent(p, TopScore.class);

@@ -12,33 +12,21 @@ public class Change_Activity implements View.OnClickListener {
     private Activity mainwin;
     private Intent intchange;
     private static final String TAG = "Nivel que elijo";
-    private String identificador,name;
-    private Integer valor;
-    private String valor2;
+    private String modoJuego,nombre;
+    private Integer nivel;
+
 
     Change_Activity(Activity w){
         this.mainwin=w;
 
+
     }
-    public Change_Activity(Activity w, String id, Integer value){
+
+    public Change_Activity(Activity w, String n, String m, Integer nl){
         this.mainwin=w;
-        this.identificador=id;
-        this.valor=value;
-    }
-
-
-    Change_Activity(Activity w, String id, String val){
-        mainwin=w;
-        identificador=id;
-        valor2=val;
-
-    }
-
-    Change_Activity(Activity w, String id, Integer value,String name){
-        this.mainwin=w;
-        this.identificador=id;
-        this.valor=value;
-        this.name=name;
+        this.modoJuego=m;
+        this.nivel=nl;
+        this.nombre=n;
 
     }
 
@@ -57,34 +45,30 @@ public class Change_Activity implements View.OnClickListener {
                 break;
             case R.id.BTN_Dibujar:
                 intchange =new Intent(mainwin,Dificultad.class);
-
-                juego="Dibujar";
-                intchange.putExtra("opcion", juego);
-                intchange.putExtra(identificador, valor2);
-
+                intchange.putExtra("modo", modoJuego);
+                intchange.putExtra("nivel", nivel);
                 break;
             case R.id.BTN_PuzZle:
                 intchange =new Intent(mainwin,Dificultad.class);
-                juego= "Puzzle";
-                intchange.putExtra("opcion", juego);
-                intchange.putExtra("nombre", valor2);
+                intchange.putExtra("modo", modoJuego);
+                intchange.putExtra("nombre",nombre);
 
                 break;
             case R.id.BTN_next:
-                if (identificador.equals("Dibujar")){
+                if (modoJuego.equals("Dibujar")){
                     intchange =new Intent(mainwin,Dibujar.class);
                 }else{
                     intchange =new Intent(mainwin,Puzzle.class);
                 }
 
-                intchange.putExtra("nivel", valor);
-                intchange.putExtra("nombre", valor2);
+                intchange.putExtra("nivel", nivel);
+                intchange.putExtra("nombre", nombre);
                 break;
             case R.id.puzzleFinish:
                 intchange =new Intent(mainwin,TopScore.class);
 
-                intchange.putExtra("nombre", identificador);
-                intchange.putExtra("score", valor);
+                intchange.putExtra("nombre", nombre);
+                intchange.putExtra("score", nivel);
 
             default:
                 throw new IllegalStateException("Pasa algo raro");

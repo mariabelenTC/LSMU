@@ -7,12 +7,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Menu extends AppCompatActivity {
-    ImageButton btn_Dibujar,btn_Puzzzle;
-    Change_Activity changeDibujar,changePuzzle;
+    private ImageButton btn_Dibujar,btn_Puzzzle;
+    private Change_Activity changeDibujar,changePuzzle;
 
-    TextView welcomeUser;
+    private TextView welcomeUser;
 
-    Bundle bundle;
+    private Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +29,8 @@ public class Menu extends AppCompatActivity {
             String User=bundle.getString("nombre"," ");
             welcomeUser.setText(User);
 
-            changeDibujar= new Change_Activity(this,"nombre",User);
-            changePuzzle= new Change_Activity(this,"nombre",User);
+            changeDibujar= new Change_Activity(this,User,"Dibujar",0);
+            changePuzzle= new Change_Activity(this,User,"Puzzle",0);
             btn_Dibujar.setOnClickListener(changeDibujar);
             btn_Puzzzle.setOnClickListener(changePuzzle);
         }

@@ -10,14 +10,10 @@ public class Score {
     private static final String TAG4 = "rgb_score";
     private Dibujar m;
     private int time = Toast.LENGTH_SHORT;
-    private MyBoton[][] botonera;
-
 
 
     public Score(Dibujar mainWin){
-
         m=mainWin;
-
     }
 
     /**
@@ -27,12 +23,9 @@ public class Score {
      * @return
      */
     public int score(int color_original, int color_asignado){
-        float resta = Math.abs(color_original - color_asignado);
-        Log.v(TAG4, ("resta: " + Float.toString(resta)));
-
-        float score = (float)((-510/255)* (int)resta +510);
-        //float score = (float) ((-100/255)*resta+100);
-        Log.v(TAG4, ("calcular score: " + Integer.toString((int)score)));
+        float resta,score;
+        resta = Math.abs(color_original - color_asignado);
+        score = (float)((-510/255)* (int)resta +510);
         return (int)score;
 
     }
@@ -43,41 +36,27 @@ public class Score {
     public int getScore(){
         int total_score=0;
         int score_max=1530*m.totalBotones;
-        Log.v(TAG2, ("puntuacion Maxima: " + Integer.toString(score_max)));
 
         int colorR_score, colorG_score, colorB_score, score_boton;
 
         for(int i = 0; i < m.fila; i++) {
             for (int j = 0; j < m.columna; j++) {
 
-                Log.v(TAG3, ("posicion: (" + Integer.toString(i) +
-                        ", " + Integer.toString(j) + ") "));
-
                 int r = Color.red(m.botonera[i][j].getColor());
                 int g = Color.green(m.botonera[i][j].getColor());
                 int b = Color.blue(m.botonera[i][j].getColor());
-                Log.v(TAG3, ("red_o: " + Integer.toString(r) +
-                        " green_o: " + Integer.toString(g) +
-                        " blue_o: " + Integer.toString(b)));
 
 
                 int r_p = Color.red(m.botonera[i][j].getColor_play());
                 int g_p = Color.green(m.botonera[i][j].getColor_play());
                 int b_p = Color.blue(m.botonera[i][j].getColor_play());
-                Log.v(TAG3, ("red_play: " + Integer.toString(r_p) +
-                        " green_play: " + Integer.toString(g_p) +
-                        " blue_play: " + Integer.toString(b_p)));
 
 
                 colorR_score = score(r, r_p);
                 colorG_score = score(g, g_p);
                 colorB_score = score(b, b_p);
-                Log.v(TAG3, ("score_R: " + Integer.toString(colorR_score) +
-                        " score G: " + Integer.toString(colorG_score) +
-                        " score_B: " + Integer.toString(colorB_score)));
 
                 score_boton = colorR_score + colorG_score + colorB_score;
-                Log.v(TAG3, ("score del boton: " + Integer.toString(score_boton)));
 
                 total_score = total_score + score_boton;
 

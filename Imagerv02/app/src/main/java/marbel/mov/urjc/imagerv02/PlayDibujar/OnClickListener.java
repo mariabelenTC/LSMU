@@ -12,11 +12,11 @@ import marbel.mov.urjc.imagerv02.R;
 import marbel.mov.urjc.imagerv02.TopScore;
 
 public class OnClickListener implements View.OnClickListener {
-    Dibujar m;
+    private Dibujar m;
     private static final String TAG1 = "colores";
     private Intent intchange;
-    ConnexionSQLiteHelper conn;
-    public int time = Toast.LENGTH_SHORT;
+    private ConnexionSQLiteHelper conn;
+    private int time = Toast.LENGTH_SHORT;
     private String name;
     private Change_Activity change;
 
@@ -36,12 +36,6 @@ public class OnClickListener implements View.OnClickListener {
         if (m.timeRunning){
             b.setBackground(new ColorDrawable(color));
             m.botonera[b.getPos_x()][b.getPos_y()].setColor_play(color);
-
-            Log.v(TAG1,("color original: "+ Integer.toString(b.getColor())));
-            Log.v(TAG1,("Color del jugador: "+ Integer.toString(b.getColor_play())));
-
-            Toast msg = Toast.makeText(m, "color added", time);
-            msg.show();
 
         }else{
             Toast msg = Toast.makeText(m, "press START to play the game", time);
