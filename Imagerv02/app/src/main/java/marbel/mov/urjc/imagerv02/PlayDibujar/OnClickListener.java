@@ -79,7 +79,7 @@ public class OnClickListener implements View.OnClickListener {
                     int score= m.score.getScore();
                     m.timeRunning = false;
                     intchange =new Intent(m, TopScore.class);
-
+                    intchange.putExtra("juego", "Dibujar");
                     intchange.putExtra("nombre", name);
                     intchange.putExtra("score", score);
                     m.startActivity(intchange);

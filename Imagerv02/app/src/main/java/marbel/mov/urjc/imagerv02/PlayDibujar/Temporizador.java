@@ -38,7 +38,7 @@ public class Temporizador extends CountDownTimer {
         int score= m.score.getScore();
         m.timeRunning = false;
         intchange =new Intent(m, TopScore.class);
-        String juego="dibujar";
+        String juego="Dibujar";
         intchange.putExtra("juego", juego);
         intchange.putExtra("nombre", nameUser);
         intchange.putExtra("score", score);

@@ -166,7 +166,7 @@ public class Puzzle extends AppCompatActivity {
 
 
     }
-    
+
     private void addBotonBotonera(GridLayout g, PiezaBoton[][] bot, int n, int m){
         int color;
         //Añade el botón al GridLayout

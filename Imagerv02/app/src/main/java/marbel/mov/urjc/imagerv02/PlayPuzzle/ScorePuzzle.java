@@ -55,7 +55,7 @@ public class ScorePuzzle {
         for(int i = 0; i < fila; i++) {
             for (int j = 0; j < columna; j++) {
                 int colorOrginal = botonera[i][j].getColor();
-                int colorJugador=botonera[i][j].getColorPlay();
+                int colorJugador=botonera[i][j].getColorput();
                 score = score(colorOrginal,colorJugador);
                 total_score = total_score + score;
             }

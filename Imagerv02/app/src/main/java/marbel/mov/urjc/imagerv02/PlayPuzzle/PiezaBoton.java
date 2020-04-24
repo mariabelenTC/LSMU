@@ -18,15 +18,20 @@ public class PiezaBoton extends Button{
 
 
 
+    private int colorput;
+
+
+
 
     //Constructor de la clase
-    public PiezaBoton(Context context, int cx, int cy , int c,int cp){
+    public PiezaBoton(Context context, int cx, int cy , int c,int cp,int cpt){
 
         super(context);
         this.pos_x= cx;
         this.pos_y = cy;
         this.color= c;
         this.colorPlay=cp;
+        this.colorput=cpt;
 
 
 
@@ -58,6 +63,12 @@ public class PiezaBoton extends Button{
     }
     public void setColor(int color) {
         this.color = color;
+    }
+    public int getColorput() {
+        return colorput;
+    }
+    public void setColorput(int colorput) {
+        this.colorput = colorput;
     }
 
     /**

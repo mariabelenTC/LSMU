@@ -37,7 +37,7 @@ public class TemporizadorPuzzle extends CountDownTimer {
         int score= puntuacion.getScore();
 
         intchange =new Intent(m, TopScore.class);
-        String juego="puzzle";
+        String juego="Puzzle";
         intchange.putExtra("juego",juego);
         intchange.putExtra("nombre", name);
         intchange.putExtra("score", score);

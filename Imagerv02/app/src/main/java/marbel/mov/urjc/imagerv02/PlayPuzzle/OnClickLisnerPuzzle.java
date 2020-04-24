@@ -47,6 +47,10 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
             p.botonera[x2][y2].setColorPlay(color1);
             p.botonera[x1][y1].setColorPlay(color2);
 
+            p.botonera[x2][y2].setColorput(color1);
+            p.botonera[x1][y1].setColorput(color2);
+
+
             p.botonera[x2][y2].setBackground(new ColorDrawable(color1));
             p.botonera[x1][y1].setBackground(new ColorDrawable(color2));
 
@@ -94,6 +98,7 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
                     p.timeRunning = false;
                     p.temporizador.cancel();
                     intchange =new Intent(p, TopScore.class);
+                    intchange.putExtra("juego", "Puzzle");
                     intchange.putExtra("nombre", nameUser);
                     intchange.putExtra("score", scor);
                     p.startActivity(intchange);
@@ -120,7 +125,6 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
         Random random = new Random();
         int n,m;
         for (int i = bot.length - 1; i > 0; i--) {
-
             for (int j = bot[i].length - 1; j > 0; j--) {
                 m = random.nextInt(i + 1);
                 n = random.nextInt(j + 1);
