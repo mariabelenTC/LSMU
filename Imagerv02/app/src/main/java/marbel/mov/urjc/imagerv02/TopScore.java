@@ -12,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import marbel.mov.urjc.imagerv02.BD.Usuario;
 import marbel.mov.urjc.imagerv02.ComandosBD.ComandosBD;
 
 public class TopScore extends AppCompatActivity {
@@ -20,18 +23,21 @@ public class TopScore extends AppCompatActivity {
     private String nameJugador,modoJuego, mensaje;
     private int scoreJugador;
     private Button btn_VolverMenu;
-    ConnexionSQLiteHelper conn =new ConnexionSQLiteHelper(this, "bd usuarios",null,1);
+    ConnexionSQLiteHelper conn;
     private Change_Activity changeRegistro;
 
 
     private Bundle bundle;
+    private JugadorScore[] listdatos;
+    private ArrayList<JugadorScore> lisjugadores;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_score);
 
-
+        conn =new ConnexionSQLiteHelper(this, "bd usuarios",null,1);
 
         btn_VolverMenu=(Button) findViewById(R.id.BTN_goMenu);
 
@@ -57,13 +63,27 @@ public class TopScore extends AppCompatActivity {
 
             tv_mess.setText(mensaje);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
+            //consultarpuntucaciones();
 
         }
     }
 
 
-    
+    /*
+    private void consultarpuntucaciones(){
+        SQLiteDatabase db = conn.getWritableDatabase();
+        Usuario usuario=null;
+        Cursor cursor=db.rawQuery("SELECT * FROM " + ComandosBD.TABLA_USUARIO,null);
 
+        while (cursor.moveToNext()){
+
+          //lisUser.add(jugadores);
+        }
+
+
+    }
+
+     */
     private void actualizarPuntuacion(String nombreUsuario, String modoJuego,Integer score){
 
         SQLiteDatabase db = conn.getWritableDatabase();

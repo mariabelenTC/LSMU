@@ -1,5 +1,5 @@
 package marbel.mov.urjc.imagerv02.BD;
-
+import java.util.Arrays;
 
 public class Usuario {
     private String nombre;
@@ -8,6 +8,10 @@ public class Usuario {
     private Integer edad;
 
     private Integer draw;
+
+    public Usuario() {
+
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -66,5 +70,9 @@ public class Usuario {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
+
+
+
+
 
 }
