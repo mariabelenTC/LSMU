@@ -20,7 +20,7 @@ public class Change_Activity implements View.OnClickListener {
         this.mainwin=w;
 
     }
-    Change_Activity(Activity w, String id, Integer value){
+    public Change_Activity(Activity w, String id, Integer value){
         this.mainwin=w;
         this.identificador=id;
         this.valor=value;

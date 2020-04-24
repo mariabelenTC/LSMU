@@ -161,27 +161,12 @@ public class Puzzle extends AppCompatActivity {
 
             }
         }
-        desordenarBotonera(botonera);
+
         addBotonBotonera(gridLayout,botonera,bm.getHeight(),bm.getWidth());
 
 
     }
-    private void desordenarBotonera(  PiezaBoton[][] bot){
-        Random random = new Random();
-        int n,m;
-        for (int i = bot.length - 1; i > 0; i--) {
-
-            for (int j = bot[i].length - 1; j > 0; j--) {
-                 m = random.nextInt(i + 1);
-                 n = random.nextInt(j + 1);
-
-                PiezaBoton temp = bot[i][j];
-                bot[i][j] = bot[m][n];
-                bot[m][n] = temp;
-            }
-        }
-
-    }
+    
     private void addBotonBotonera(GridLayout g, PiezaBoton[][] bot, int n, int m){
         int color;
         //Añade el botón al GridLayout
@@ -192,6 +177,7 @@ public class Puzzle extends AppCompatActivity {
                 color=b.getColor();
                 b.setPos_x(i);
                 b.setPos_y(j);
+                b.setColorPlay(color);
                 b.setBackground(new ColorDrawable(color));
                 g.addView(b, indice);
                 b.setOnClickListener(put_toast);

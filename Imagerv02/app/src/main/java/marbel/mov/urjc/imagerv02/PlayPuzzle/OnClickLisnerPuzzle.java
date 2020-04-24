@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import marbel.mov.urjc.imagerv02.Change_Activity;
 import marbel.mov.urjc.imagerv02.R;
 import marbel.mov.urjc.imagerv02.TopScore;
@@ -58,7 +60,7 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
         }else{
             x1=b.getPos_x();
             y1=b.getPos_y();
-            b2=b;
+
             color1=p.botonera[x1][y1].getColorPlay();
 
             Log.v(TAG1, "boton1: (" + Integer.toString(x1) +","+ Integer.toString(y1) +") y color: " + Integer.toString(color1));
@@ -77,6 +79,7 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
 
                 p.timeRunning=true;
                 p.temporizador.start();
+                desordenarBotonera(p.botonera);
 
                 break;
             case R.id.puzzleFinish:
@@ -103,10 +106,34 @@ class OnClickLisnerPuzzle implements View.OnClickListener {
                 break;
 
             default:
-                put_toasts(v);
+                if (p.timeRunning) {
+                    put_toasts(v);
+                }else {
+                    Toast msg = Toast.makeText(p, "press START to play the game", time);
+                    msg.show();
+                }
                 break;
 
         }
+    }
+    private void desordenarBotonera(  PiezaBoton[][] bot){
+        Random random = new Random();
+        int n,m;
+        for (int i = bot.length - 1; i > 0; i--) {
+
+            for (int j = bot[i].length - 1; j > 0; j--) {
+                m = random.nextInt(i + 1);
+                n = random.nextInt(j + 1);
+
+                int colorO = bot[i][j].getColorPlay();
+                int colorP=bot[m][n].getColorPlay();
+                bot[i][j].setColorPlay(colorP);
+                bot[m][n].setColorPlay(colorO);
+                bot[i][j].setBackground(new ColorDrawable(colorP));
+                bot[m][n].setBackground(new ColorDrawable(colorO));
+            }
+        }
+
     }
 
 
