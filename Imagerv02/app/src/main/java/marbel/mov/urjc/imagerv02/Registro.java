@@ -57,6 +57,8 @@ public class Registro extends AppCompatActivity {
         values.put(ComandosBD.CAMPO_NOMBRE,campoNombre.getText().toString());
         values.put(ComandosBD.CAMPO_PASSWORD,campoPassword.getText().toString());
         values.put(ComandosBD.CAMPO_EDAD,campoEdad.getText().toString());
+        values.put(ComandosBD.CAMPO_DRAW,0);
+        values.put(ComandosBD.CAMPO_ORDER,0);
 
         Long id_Resultado=db.insert(ComandosBD.TABLA_USUARIO,ComandosBD.CAMPO_NICK,values);
         Toast.makeText(getApplicationContext(),"usuario " + id_Resultado,Toast.LENGTH_SHORT).show();

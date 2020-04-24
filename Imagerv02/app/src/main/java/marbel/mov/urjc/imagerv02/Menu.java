@@ -3,12 +3,14 @@ package marbel.mov.urjc.imagerv02;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Menu extends AppCompatActivity {
     private ImageButton btn_Dibujar,btn_Puzzzle;
     private Change_Activity changeDibujar,changePuzzle;
+    private static final String TAG = "namesr";
 
     private TextView welcomeUser;
 
@@ -26,8 +28,10 @@ public class Menu extends AppCompatActivity {
 
         bundle=getIntent().getExtras();
         if(bundle!=null){
-            String User=bundle.getString("nombre"," ");
-            welcomeUser.setText(User);
+            String nameUser=bundle.getString("nombre"," ");
+            String User=bundle.getString("user"," ");
+            Log.v(TAG,"usuario: " + User);
+            welcomeUser.setText(nameUser);
 
             changeDibujar= new Change_Activity(this,User,"Dibujar",0);
             changePuzzle= new Change_Activity(this,User,"Puzzle",0);

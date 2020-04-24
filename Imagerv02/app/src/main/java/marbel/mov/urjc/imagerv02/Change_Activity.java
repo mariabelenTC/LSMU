@@ -46,7 +46,7 @@ public class Change_Activity implements View.OnClickListener {
             case R.id.BTN_Dibujar:
                 intchange =new Intent(mainwin,Dificultad.class);
                 intchange.putExtra("modo", modoJuego);
-                intchange.putExtra("nivel", nivel);
+                intchange.putExtra("nombre", nombre);
                 break;
             case R.id.BTN_PuzZle:
                 intchange =new Intent(mainwin,Dificultad.class);

@@ -18,15 +18,15 @@ import marbel.mov.urjc.imagerv02.ComandosBD.ComandosBD;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG1 = "basedatos";
-    TextView tv_registrar;
-    Button btn_empezar;
-    EditText campoUsuario,campoPassword;
+    private TextView tv_registrar;
+    private Button btn_empezar;
+    private EditText campoUsuario;
 
 
-    String nombreUsuario;
+    private String nombreUsuario;
 
-    ConnexionSQLiteHelper conn;
-    Change_Activity changeRegistro,changeMenu;
+    private ConnexionSQLiteHelper conn;
+    private Change_Activity changeRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intchange;
         intchange =new Intent(this,Menu.class);
         intchange.putExtra("nombre", nombreUsuario );
+        intchange.putExtra("user", campoUsuario.getText().toString());
 
         this.startActivity(intchange);
 
