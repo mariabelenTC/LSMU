@@ -19,6 +19,7 @@ import marbel.mov.urjc.imagerv02.ComandosBD.ComandosBD;
 
 public class TopScore extends AppCompatActivity {
 
+    private static final String TAG = "cursor";
     private TextView score1,score2,score3,player1,player2,player3,tv_mess;
     private String nameJugador,modoJuego, mensaje;
     private int scoreJugador;
@@ -29,15 +30,16 @@ public class TopScore extends AppCompatActivity {
 
     private Bundle bundle;
     private JugadorScore[] listdatos;
-    private ArrayList<JugadorScore> lisjugadores;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_score);
+        ArrayList<Usuario> lisjugadores;
 
-        conn =new ConnexionSQLiteHelper(this, "bd usuarios",null,1);
+        conn =new ConnexionSQLiteHelper(this);
 
         btn_VolverMenu=(Button) findViewById(R.id.BTN_goMenu);
 
@@ -63,27 +65,73 @@ public class TopScore extends AppCompatActivity {
 
             tv_mess.setText(mensaje);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
-            //consultarpuntucaciones();
+            lisjugadores= getlistUserInfo(modoJuego);
+            printTop(lisjugadores);
+
 
         }
     }
+    private void printTop( ArrayList<Usuario> listR){
 
 
-    /*
-    private void consultarpuntucaciones(){
+    }
+
+
+    private ArrayList<Usuario> getlistUserInfo( String modoJuego){
+        ArrayList<Usuario> lista=new ArrayList<Usuario>();
+        Cursor cursor;
         SQLiteDatabase db = conn.getWritableDatabase();
         Usuario usuario=null;
-        Cursor cursor=db.rawQuery("SELECT * FROM " + ComandosBD.TABLA_USUARIO,null);
+        String[] columnas={ComandosBD.FeedEntry.CAMPO_NICK,ComandosBD.FeedEntry.CAMPO_DRAW,ComandosBD.FeedEntry.CAMPO_ORDER};
 
-        while (cursor.moveToNext()){
+        String sortOrder;
 
-          //lisUser.add(jugadores);
+
+        if (modoJuego.equals("Dibujar")){
+            sortOrder =
+                    ComandosBD.FeedEntry.CAMPO_DRAW + " DESC";
+
+        }else {
+            sortOrder =
+                    ComandosBD.FeedEntry.CAMPO_ORDER+ " DESC";
+
+        }
+        try {
+
+            cursor =db.query(
+                ComandosBD.FeedEntry.TABLA_USUARIO,
+                columnas,
+                null,
+                null,
+                null,
+                null,
+                sortOrder
+            );
+
+            Log.v(TAG,Integer.toString(cursor.getColumnCount()));
+            /*
+            while (cursor.moveToNext()){
+                usuario.setUsario(cursor.getString(0));
+                usuario.setDraw(cursor.getInt(4));
+                usuario.setOrder(cursor.getInt(5));
+                lista.add(usuario);
+
+            }
+            */
+
+            cursor.close();
+
+        }catch (Exception e){
+
+            Toast.makeText(getApplicationContext(),"No existe el usuario",Toast.LENGTH_LONG).show();
+
         }
 
+        return lista;
 
     }
 
-     */
+
     private void actualizarPuntuacion(String nombreUsuario, String modoJuego,Integer score){
 
         SQLiteDatabase db = conn.getWritableDatabase();
@@ -91,13 +139,14 @@ public class TopScore extends AppCompatActivity {
         ContentValues values =new ContentValues();
         if (modoJuego.equals("Dibujar")){
 
-            values.put(ComandosBD.CAMPO_DRAW,score);
+            values.put(ComandosBD.FeedEntry.CAMPO_DRAW,score);
         }else{
-            values.put(ComandosBD.CAMPO_ORDER,score);
+            values.put(ComandosBD.FeedEntry.CAMPO_ORDER,score);
         }
-        db.update(ComandosBD.TABLA_USUARIO,values,ComandosBD.CAMPO_NICK+"=?",parametros);
+        db.update(ComandosBD.FeedEntry.TABLA_USUARIO,values,ComandosBD.FeedEntry.CAMPO_NICK+"=?",parametros);
 
 
         db.close();;
     }
 }
+

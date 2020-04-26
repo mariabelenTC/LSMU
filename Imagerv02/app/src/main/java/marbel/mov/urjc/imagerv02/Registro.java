@@ -22,7 +22,6 @@ public class Registro extends AppCompatActivity {
 
 
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,19 +47,19 @@ public class Registro extends AppCompatActivity {
     }
 
     private void registrarUsuarios(){
-        ConnexionSQLiteHelper conn =new ConnexionSQLiteHelper(this, "bd usuarios",null,1);
+        ConnexionSQLiteHelper conn =new ConnexionSQLiteHelper(this);
 
         SQLiteDatabase db = conn.getWritableDatabase();
         ContentValues values =new ContentValues();
 
-        values.put(ComandosBD.CAMPO_NICK,campoUsuario.getText().toString());
-        values.put(ComandosBD.CAMPO_NOMBRE,campoNombre.getText().toString());
-        values.put(ComandosBD.CAMPO_PASSWORD,campoPassword.getText().toString());
-        values.put(ComandosBD.CAMPO_EDAD,campoEdad.getText().toString());
-        values.put(ComandosBD.CAMPO_DRAW,0);
-        values.put(ComandosBD.CAMPO_ORDER,0);
+        values.put(ComandosBD.FeedEntry.CAMPO_NICK,campoUsuario.getText().toString());
+        values.put(ComandosBD.FeedEntry.CAMPO_NOMBRE,campoNombre.getText().toString());
+        values.put(ComandosBD.FeedEntry.CAMPO_PASSWORD,campoPassword.getText().toString());
+        values.put(ComandosBD.FeedEntry.CAMPO_EDAD,campoEdad.getText().toString());
+        values.put(ComandosBD.FeedEntry.CAMPO_DRAW,0);
+        values.put(ComandosBD.FeedEntry.CAMPO_ORDER,0);
 
-        Long id_Resultado=db.insert(ComandosBD.TABLA_USUARIO,ComandosBD.CAMPO_NICK,values);
+        Long id_Resultado=db.insert(ComandosBD.FeedEntry.TABLA_USUARIO,ComandosBD.FeedEntry.CAMPO_NICK,values);
         Toast.makeText(getApplicationContext(),"usuario " + id_Resultado,Toast.LENGTH_SHORT).show();
         db.close();
     }

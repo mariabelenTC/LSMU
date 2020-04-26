@@ -79,7 +79,7 @@ public class PiezaBoton extends Button{
      * @return
      */
     public static PiezaBoton getDefaultButton(int[] dispDimensions, Bitmap bm, Puzzle m) {
-        int[] buttonDimensions = new int[]{ dispDimensions[0]/ (bm.getHeight()*3), dispDimensions[1]/ (bm.getWidth())};
+        int[] buttonDimensions = new int[]{ dispDimensions[0]/ (bm.getHeight()*2), dispDimensions[1]/ (bm.getWidth())};
         PiezaBoton b = new PiezaBoton(m);
         b.setMinHeight(0);
         b.setMinWidth(0);

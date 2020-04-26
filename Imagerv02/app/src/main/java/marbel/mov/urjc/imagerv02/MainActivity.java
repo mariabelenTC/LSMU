@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        conn =new ConnexionSQLiteHelper(this, "bd usuarios",null,1);
+        conn =new ConnexionSQLiteHelper(this);
 
     }
     public void onClick(View view){
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void consultar(){
         SQLiteDatabase db = conn.getReadableDatabase();
-        String[] campos={ComandosBD.CAMPO_NOMBRE};
+        String[] campos={ComandosBD.FeedEntry.CAMPO_NOMBRE};
         String[] parametros;
 
 
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             /* */
 
-            Cursor cursor =db.query(ComandosBD.TABLA_USUARIO,campos,ComandosBD.CAMPO_NICK+"=?",parametros,null,null,null);
+            Cursor cursor =db.query(ComandosBD.FeedEntry.TABLA_USUARIO,campos,ComandosBD.FeedEntry.CAMPO_NICK+"=?",parametros,null,null,null);
             cursor.moveToFirst();
 
             nombreUsuario=cursor.getString(0);
