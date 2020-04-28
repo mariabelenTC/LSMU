@@ -24,15 +24,11 @@ public class TopScore extends AppCompatActivity {
     private String nameJugador,modoJuego, mensaje;
     private int scoreJugador;
     private Button btn_VolverMenu;
-    ConnexionSQLiteHelper conn;
+    private ConnexionSQLiteHelper conn;
     private Change_Activity changeRegistro;
 
-
     private Bundle bundle;
-    private JugadorScore[] listdatos;
-    private ArrayList<Usuario> listjugadores;
-    List itemIds = new ArrayList<>();
-    private final static String TAG= "cursor";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +48,10 @@ public class TopScore extends AppCompatActivity {
         player1=(TextView) findViewById(R.id.tv_jugador1);
         player2=(TextView) findViewById(R.id.tv_jugador2);
         player3=(TextView) findViewById(R.id.tv_jugador3);
-
-        TextView[] textVList= new TextView[]{player1,player2,player3};
+        TextView[] textVPlayers= new TextView[]{player1,player2,player3};
+        TextView[] textVScores= new TextView[]{score1,score2,score3};
 
         tv_mess=(TextView) findViewById(R.id.mgs);
-
 
         bundle=getIntent().getExtras();
         if(bundle!=null){
@@ -69,69 +64,46 @@ public class TopScore extends AppCompatActivity {
             tv_mess.setText(mensaje);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
-            listjugadores= getlistUserInfo(modoJuego);
-            System.out.println("TAMAÑOOOOOOOOOOOO LISTA JUGADORES::::::::::::::::      "+Integer.toString(listjugadores.size()));
-            printTop(listjugadores,textVList);
-
+            printTop(modoJuego,textVPlayers,textVScores);
 
         }
     }
-    private void printTop( ArrayList<Usuario> listR, TextView[] textVList){
-
-        for(int i = 0; i < listR.size(); i++) {
-            System.out.print(listR.get(i));
-            //textVList[i].setText(listR.get(i));
-        }
-
-    }
 
 
+    private void printTop( String modoJuego, TextView[] name, TextView[] score){
 
-    private ArrayList getlistUserInfo( String modoJuego){
-        ArrayList<Usuario> lista=new ArrayList<Usuario>();
-        List itemIds = new ArrayList<>();
         Cursor cursor;
-        SQLiteDatabase db = conn.getWritableDatabase();
-        Usuario usuario=null;
-        String[] columnas;
+        SQLiteDatabase db = conn.getReadableDatabase();
+        int i=0;
+        String query;
 
-        String sortOrder;
-        String limit= " 3";
 
         if (modoJuego.equals("Dibujar")){
-            sortOrder = ComandosBD.CAMPO_DRAW + " DESC";
-            columnas=new String[]{ComandosBD.CAMPO_NICK,ComandosBD.CAMPO_DRAW};
+            query="SELECT "+ComandosBD.CAMPO_NICK + ", " + ComandosBD.CAMPO_DRAW+ " FROM "+ ComandosBD.TABLA_USUARIO+ " ORDER BY " +  ComandosBD.CAMPO_DRAW + " DESC LIMIT 3" ;
+            cursor =db.rawQuery(query, null);
+            if(cursor.moveToFirst()){
+                do{
+                    name[i].setText(cursor.getString(cursor.getColumnIndex(ComandosBD.CAMPO_NICK)));
+                    score[i].setText(cursor.getString(cursor.getColumnIndex(ComandosBD.CAMPO_DRAW)));
+                    i+=1;
+                }while(cursor.moveToNext());
+            }
 
         }else {
-            sortOrder =
-                    ComandosBD.CAMPO_ORDER+ " DESC";
-            columnas=new String[]{ComandosBD.CAMPO_NICK,ComandosBD.CAMPO_ORDER};
-
-        }
-
-        try {
-
-            cursor =db.queryWithFactory(null, false,
-                    ComandosBD.TABLA_USUARIO,
-                    columnas,
-                    null,null,null, null,
-                    sortOrder,limit);
-
-            while(cursor.moveToNext()) {
-                long itemId = cursor.getLong(
-                        cursor.getColumnIndexOrThrow(ComandosBD.CAMPO_NICK));
-                itemIds.add(itemId);
+            query="SELECT "+ComandosBD.CAMPO_NICK + ", " + ComandosBD.CAMPO_ORDER+ " FROM "+ ComandosBD.TABLA_USUARIO+ " ORDER BY " +  ComandosBD.CAMPO_ORDER+ " DESC LIMIT 3";
+            cursor =db.rawQuery(query, null);
+            if(cursor.moveToFirst()){
+                do{
+                    name[i].setText(cursor.getString(cursor.getColumnIndex(ComandosBD.CAMPO_NICK)));
+                    score[i].setText(cursor.getString(cursor.getColumnIndex(ComandosBD.CAMPO_ORDER)));
+                    i+=1;
+                }while(cursor.moveToNext());
             }
-            cursor.close();
-
-
-        }catch (Exception e){
-
-            Toast.makeText(getApplicationContext(),"No existe el usuario",Toast.LENGTH_LONG).show();
 
         }
 
-        return (ArrayList) itemIds;
+        cursor.close();
+        db.close();
 
     }
 

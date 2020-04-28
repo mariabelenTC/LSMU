@@ -10,15 +10,15 @@
 
 
     <LinearLayout
-        android:layout_width="295dp"
-        android:layout_height="108dp"
+        android:layout_width="394dp"
+        android:layout_height="116dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="273dp"
         android:layout_marginRight="22dp"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="91dp"
+            android:layout_width="123dp"
             android:layout_height="76dp"
             android:layout_gravity="center"
             android:layout_marginTop="19dp"
@@ -30,10 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="Jugador 1"
                 android:textColor="#000"
-                android:textSize="11dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_score1"
@@ -43,14 +43,14 @@
                 android:gravity="center"
                 android:text="Jugador 1"
                 android:textColor="#000"
-                android:textSize="8dp" />
+                android:textSize="15dp" />
 
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="110dp"
+            android:layout_width="147dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
@@ -64,7 +64,7 @@
                 android:gravity="center"
                 android:text="Jugador 1"
                 android:textColor="#000"
-                android:textSize="16dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_score2"
@@ -74,16 +74,16 @@
                 android:gravity="center"
                 android:text="Jugador 1"
                 android:textColor="#000"
-                android:textSize="10dp" />
+                android:textSize="15dp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="61dp"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:orientation="vertical"
             android:textColor="#000">
@@ -93,11 +93,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:foregroundGravity="center"
                 android:gravity="center"
                 android:text="Jugador 1"
-                android:foregroundGravity="center"
                 android:textColor="#000"
-                android:textSize="10dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_score3"
@@ -107,7 +107,7 @@
                 android:gravity="center_horizontal"
                 android:text="Jugador 1"
                 android:textColor="#000"
-                android:textSize="7dp" />
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -125,11 +125,11 @@
             android:id="@+id/mgs"
             android:layout_width="220dp"
             android:layout_height="96dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="18dp"
             android:gravity="center"
             android:text="El mensaje que recibirá el jugador"
-            android:textColor="#fff"
-            android:textSize="20dp" />
+            android:textColor="#000"
+            android:textSize="25dp" />
 
         <Button
             android:id="@+id/BTN_goMenu"

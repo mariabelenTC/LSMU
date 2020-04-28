@@ -39,7 +39,7 @@ public class Dibujar extends AppCompatActivity {
     public DimensionesPantalla dimp=new DimensionesPantalla(this);
     private String nameUser;
     public OnClickListener put_toast;
-    public boolean ganador =false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,11 +192,7 @@ public class Dibujar extends AppCompatActivity {
                 //Añade el botón al GridLayout
                 gridLayout.addView(b, indice);
                 indice = indice+1;
-
             }
         }
-
     }
-
-
 }
