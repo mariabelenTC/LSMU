@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/layout"
+    android:background="@drawable/fonditos"
     tools:context=".PlayDibujar.Dibujar">
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,10 +60,11 @@
             android:layout_marginLeft="9dp"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/botonera"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="245dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -107,6 +109,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical"
         android:gravity="bottom">
 
@@ -115,6 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:max="255"
+            android:background="#fff"
             android:thumbTint="#e57373" />
 
         <SeekBar
@@ -122,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:max="255"
+            android:background="#fff"
             android:thumbTint="#9ccc65" />
 
         <SeekBar
@@ -129,6 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:max="255"
+            android:background="#fff"
             android:thumbTint="#42a5f5" />
 
     </LinearLayout>

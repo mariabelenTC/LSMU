@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/fonditos2"
     android:id="@+id/ContenedorDificultad"
     tools:context=".Dificultad">
 
@@ -15,6 +16,7 @@
         android:id="@+id/BTN_next"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:background="#fff"
         android:layout_gravity="center"
         app:srcCompat="@drawable/next"/>
 

@@ -10,8 +10,7 @@ public class Score {
     private static final String TAG4 = "rgb_score";
     private Dibujar m;
     private int time = Toast.LENGTH_SHORT;
-    private int maxRGB=10;
-    private int maxColor=30;
+
 
     public Score(Dibujar mainWin){
         m=mainWin;

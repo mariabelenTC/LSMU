@@ -3,10 +3,12 @@ package marbel.mov.urjc.imagerv02;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,7 +30,7 @@ public class TopScore extends AppCompatActivity {
     private Change_Activity changeRegistro;
 
     private Bundle bundle;
-
+    private Intent intchange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class TopScore extends AppCompatActivity {
             modoJuego=bundle.getString("juego", " ");
             scoreJugador=bundle.getInt("score", 0);
 
-            mensaje="Tu puntuación es de " + Integer.toString(scoreJugador) + " "+ nameJugador+" en: "+ modoJuego;
+            mensaje="Tu puntuación es de " + Integer.toString(scoreJugador) + "puntos en el juego de: "+ modoJuego;
 
             tv_mess.setText(mensaje);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
@@ -68,7 +70,13 @@ public class TopScore extends AppCompatActivity {
 
         }
     }
+    public void onClick(View view){
 
+        intchange = new Intent(this,MainActivity.class );
+
+        this.startActivity(intchange);
+
+    }
 
     private void printTop( String modoJuego, TextView[] name, TextView[] score){
 
