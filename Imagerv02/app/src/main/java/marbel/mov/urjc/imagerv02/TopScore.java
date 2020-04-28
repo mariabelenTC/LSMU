@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import marbel.mov.urjc.imagerv02.BD.Usuario;
 import marbel.mov.urjc.imagerv02.ComandosBD.ComandosBD;
@@ -30,6 +31,7 @@ public class TopScore extends AppCompatActivity {
     private Bundle bundle;
     private JugadorScore[] listdatos;
     private ArrayList<Usuario> listjugadores;
+    List itemIds = new ArrayList<>();
     private final static String TAG= "cursor";
 
     @Override
@@ -51,7 +53,7 @@ public class TopScore extends AppCompatActivity {
         player2=(TextView) findViewById(R.id.tv_jugador2);
         player3=(TextView) findViewById(R.id.tv_jugador3);
 
-
+        TextView[] textVList= new TextView[]{player1,player2,player3};
 
         tv_mess=(TextView) findViewById(R.id.mgs);
 
@@ -68,63 +70,60 @@ public class TopScore extends AppCompatActivity {
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
             listjugadores= getlistUserInfo(modoJuego);
-           printTop(listjugadores);
+            System.out.println("TAMAÑOOOOOOOOOOOO LISTA JUGADORES::::::::::::::::      "+Integer.toString(listjugadores.size()));
+            printTop(listjugadores,textVList);
 
 
         }
     }
-    private void printTop( ArrayList<Usuario> listR){
+    private void printTop( ArrayList<Usuario> listR, TextView[] textVList){
 
-
+        for(int i = 0; i < listR.size(); i++) {
+            System.out.print(listR.get(i));
+            //textVList[i].setText(listR.get(i));
+        }
 
     }
 
 
 
-    private ArrayList<Usuario> getlistUserInfo( String modoJuego){
+    private ArrayList getlistUserInfo( String modoJuego){
         ArrayList<Usuario> lista=new ArrayList<Usuario>();
+        List itemIds = new ArrayList<>();
         Cursor cursor;
         SQLiteDatabase db = conn.getWritableDatabase();
         Usuario usuario=null;
-        String[] columnas={ComandosBD.CAMPO_NICK,ComandosBD.CAMPO_DRAW,ComandosBD.CAMPO_ORDER};
+        String[] columnas;
 
         String sortOrder;
-
+        String limit= " 3";
 
         if (modoJuego.equals("Dibujar")){
-            sortOrder =
-                    ComandosBD.CAMPO_DRAW + " DESC";
+            sortOrder = ComandosBD.CAMPO_DRAW + " DESC";
+            columnas=new String[]{ComandosBD.CAMPO_NICK,ComandosBD.CAMPO_DRAW};
 
         }else {
             sortOrder =
                     ComandosBD.CAMPO_ORDER+ " DESC";
+            columnas=new String[]{ComandosBD.CAMPO_NICK,ComandosBD.CAMPO_ORDER};
 
         }
 
         try {
 
-            cursor =db.query(
+            cursor =db.queryWithFactory(null, false,
                     ComandosBD.TABLA_USUARIO,
                     columnas,
-                    ComandosBD.CAMPO_NICK+"=?",
-                    null,
-                    null,
-                    null,
-                    sortOrder
-            );
+                    null,null,null, null,
+                    sortOrder,limit);
 
-            System.out.println("holaaaAAAAAAAAAAAAAA::::::::::::::      "+Integer.toString(cursor.getColumnCount()));
-            cursor.moveToFirst();
-            while (cursor.moveToNext()){
-                usuario.setUsario(cursor.getString(0));
-                usuario.setDraw(cursor.getInt(4));
-                usuario.setOrder(cursor.getInt(5));
-                lista.add(usuario);
-
+            while(cursor.moveToNext()) {
+                long itemId = cursor.getLong(
+                        cursor.getColumnIndexOrThrow(ComandosBD.CAMPO_NICK));
+                itemIds.add(itemId);
             }
-
-
             cursor.close();
+
 
         }catch (Exception e){
 
@@ -132,7 +131,7 @@ public class TopScore extends AppCompatActivity {
 
         }
 
-        return lista;
+        return (ArrayList) itemIds;
 
     }
 
