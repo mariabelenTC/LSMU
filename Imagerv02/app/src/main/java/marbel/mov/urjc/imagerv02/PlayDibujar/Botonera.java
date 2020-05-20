@@ -12,9 +12,7 @@ public class Botonera {
         m=main;
 
     }
-
-
-
+    
     /**
      * Añade Myboton a un arraybidimensional.
      * @param boton boton de tipo MyBoton que quiero guardar

@@ -65,7 +65,6 @@ public class TopScore extends AppCompatActivity {
 
             tv_mess.setText(mensaje);
             actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
-            actualizarPuntuacion(nameJugador, modoJuego,scoreJugador);
             printTop(modoJuego,textVPlayers,textVScores);
 
         }
