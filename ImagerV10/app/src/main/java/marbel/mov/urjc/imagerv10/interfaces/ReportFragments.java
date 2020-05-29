@@ -2,7 +2,8 @@ package marbel.mov.urjc.imagerv10.interfaces;
 
 public interface ReportFragments {
 
-    public void startGame();
+    public void startGamePuzzle();
+    public void starGameDraw();
     public void callSettings();
     public void consultRanking();
     public void consultInstruccions();

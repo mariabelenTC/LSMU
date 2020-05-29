@@ -18,8 +18,11 @@ public class OnclickListener implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_Play:
-                interfaceReportFragments.startGame();
+            case R.id.btn_Puzzle:
+                interfaceReportFragments.startGamePuzzle();
+                break;
+            case R.id.btn_Draw:
+                interfaceReportFragments.starGameDraw();
                 break;
             case R.id.btn_Ajustes:
                 interfaceReportFragments.callSettings();
@@ -33,9 +36,7 @@ public class OnclickListener implements View.OnClickListener{
             case R.id.btn_User:
                 interfaceReportFragments.editUsers();
                 break;
-            case R.id.btn_Info:
-                interfaceReportFragments.consultInformation();
-                break;
+
         }
 
     }

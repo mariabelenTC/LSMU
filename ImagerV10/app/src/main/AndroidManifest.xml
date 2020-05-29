@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activitys.InstructionsActivity"
-            android:label="@string/title_activity_instructions"
+            android:name=".activitys.InstruccionesActivity"
+            android:label="@string/title_activity_instrucciones"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".activitys.SplashActivity">
             <intent-filter>
@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

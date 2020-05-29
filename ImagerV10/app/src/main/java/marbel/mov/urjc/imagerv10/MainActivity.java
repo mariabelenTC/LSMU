@@ -1,12 +1,14 @@
 package marbel.mov.urjc.imagerv10;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import marbel.mov.urjc.imagerv10.activitys.InstruccionesActivity;
 import marbel.mov.urjc.imagerv10.fragments.InicioFragment;
 import marbel.mov.urjc.imagerv10.interfaces.ReportFragments;
 
@@ -27,9 +29,17 @@ public class MainActivity extends AppCompatActivity implements ReportFragments, 
     public void onFragmentInteraction(Uri uri) {
 
     }
+
     @Override
-    public void startGame() {
-        Toast.makeText(getApplicationContext(),"inicia Juego desde el activity", Toast.LENGTH_SHORT).show();
+    public void startGamePuzzle() {
+        Toast.makeText(getApplicationContext(),"llamar juego puzzle desde el activity", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void starGameDraw() {
+        Toast.makeText(getApplicationContext(),"llamar juego dibujar desde el activity", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -46,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements ReportFragments, 
 
     @Override
     public void consultInstruccions() {
-        Toast.makeText(getApplicationContext(),"cosult instrucciones desde el activity", Toast.LENGTH_SHORT).show();
-
+        Intent miIntent = new Intent(MainActivity.this, InstruccionesActivity.class);
+        startActivity(miIntent);
     }
 
     @Override

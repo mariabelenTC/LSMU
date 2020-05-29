@@ -5,14 +5,29 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorSplash">#FFFFFF</color>
     <color name="colorBlanco">#FFFFFF</color>
-
+    <color name="colorBlancoTransparente">#cccccc</color>
     <color name="colorTransparente">#00000000</color>
+
     <color name="colorRojo">#871616</color>
     <color name="colorTurquesa">#03A9F5</color>
     <color name="colorVerde">#26CA69</color>
     <color name="colorAmarillo">#FFCC00</color>
     <color name="colorNegro">#050000</color>
+    <color name="colorAzulMarino">#001A9C</color>
     <color name="colorAzul">#003AD5</color>
     <color name="colorFuxia">#CC33CC</color>
     <color name="colorAmarilloOscuro">#adba49</color>
+
+
+    <color name="colorRosaSalmonClaro">#FF9AA2</color>
+    <color name="colorMelon">#FFB7B2</color>
+    <color name="colorNaranjaPalido">#FFDAC1</color>
+    <color name="colorBlancoSucio">#E2F0CB</color>
+    <color name="colorMentaMagica">#B5EAD7</color>
+    <color name="colorBigaro">#C7CEEA</color>
+
+
+    <color name="colorInformacion">#F44236</color>
+
+
 </resources>

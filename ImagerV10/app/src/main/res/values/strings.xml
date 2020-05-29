@@ -3,7 +3,29 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_instructions">InstructionsActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_instrucciones">InstruccionesActivity</string>
+    <string name="tab_text_1">Ayuda</string>
+    <string name="tab_text_2">Puzzle</string>
+    <string name="tab_text_3">Draw</string>
+    <string name="tab_text_4">Ranking</string>
+    <string name="tab_text_5">Jugador</string>
+    <string name="tab_text_6">Ajustes</string>
+
+
+    <string name="texto_instruccion_final">Y listo, ahora puedes empezar a jugar, presiona iniciar y prueba tu retentiva!!!</string>
+    <string name="texto_instrucciones_informacion">Este juego es el proyecto final de la asignatura de Laboratorios de Sistemas Oblicuos y Moviles del grado de Ingenieria Telemática </string>
+    <string name="texto_instruccion_user">Tienes que estar regristado si quieres empezar a jugar, y ganar tu posición en el ranking, aquí puedes registrarte</string>
+    <string name="texto_instrucciones_instrucciones">¿Cómo funciona la aplicación? Lee atentamente estas instrucciones y empieza a jugar cuanto antes</string>
+    <string name="texto_instrucciones_ranking">Consulta el ranking de puntos obtenidos en cada partida y mira que usuarios están en el TOP </string>
+
+    <string name="texto_instrucciones_ajustes">En Ajustes puedes personalizar el tiempo, por palabras, o seleccionar el nivel inicial entre otros elementos de configuración...</string>
+    <string name="texto_instrucciones_juego">Desde aquí podrás medir tu retentiva probando el test de Stroop, en el que deberás indicar si el nombre del color corresponde al color de la palabra...</string>
+    <string name="texto_instrucciones_introduccion">El efecto Stroop permite medir la interferencia en el tiempo de reacción de las personas cuando se presenta el nombre de un color escrito o pintado con un color que no corresponde al mismo...</string>
+    <string name="title_activity_ajustes_tema">AjustesTemaActivity</string>
+
+    <string name="info_acerca_de">Esta aplicación nace como proyecto final de la asignatura de Laboratorios de Sistemas Oblicuos y Moviles del grado de Ingenieria Telemática </string>
+    <string name="texto_instruccion_juego_puzzle">En este Juego tienes que selecionar la pieza que quieras cambiar y luego la pieza por la que lo quieras cambiar, tienes conseguir colocar todas las piezas antes de que se acabe el tiempo. :)</string>
+    <string name="texto_instruccion_juego_draw">En este Juego tienes que elegir los colores usando las tres barras de color R, G y B. Despues tendras que selecionar la pieza para darle color. Tienes que conseguir que sea igual que la muestra.</string>
+
+
 </resources>

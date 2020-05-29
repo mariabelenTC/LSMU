@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import androidx.fragment.app.Fragment;
 
 import marbel.mov.urjc.imagerv10.R;
 import marbel.mov.urjc.imagerv10.interfaces.ReportFragments;
@@ -37,7 +36,7 @@ public class InicioFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View v;
     private Activity activity;
-    private ImageButton b_play,b_setting,b_ranking,b_help,b_user,b_info;
+    private ImageButton b_puzzle,b_draw,b_setting,b_ranking,b_help,b_user,b_info;
     private ReportFragments interfaceReportFragments;
     OnclickListener manejador;
 
@@ -77,23 +76,23 @@ public class InicioFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         v=  inflater.inflate(R.layout.fragment_inicio, container, false);
-        b_play=v.findViewById(R.id.btn_Play);
+        b_puzzle=v.findViewById(R.id.btn_Puzzle);
+        b_draw=v.findViewById(R.id.btn_Draw);
         b_setting =v.findViewById(R.id.btn_Ajustes);
         b_ranking=v.findViewById(R.id.btn_Ranking);
         b_help=v.findViewById(R.id.btn_Ayuda);
         b_user=v.findViewById(R.id.btn_User);
-        b_info=v.findViewById(R.id.btn_Info);
+
 
         manejador = new OnclickListener(this.interfaceReportFragments);
 
-        b_play.setOnClickListener(manejador);
-
+        b_puzzle.setOnClickListener(manejador);
+        b_draw.setOnClickListener(manejador);
         b_setting.setOnClickListener(manejador);
-
         b_ranking.setOnClickListener(manejador);
         b_help.setOnClickListener(manejador);
         b_user.setOnClickListener(manejador);
-        b_info.setOnClickListener(manejador);
+
 
         return v;
     }
