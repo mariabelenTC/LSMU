@@ -11,22 +11,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import marbel.mov.urjc.imagerv10.R;
 import marbel.mov.urjc.imagerv10.activitys.ui.main.SectionsPagerAdapter;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesAjustesFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesAyudaFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesJuegoDrawFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesJuegoPuzzleFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesRankingFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesUsuarioFragment;
+import marbel.mov.urjc.imagerv10.interfaces.IFragmentsInstructions;
 
-public class InstruccionesActivity extends AppCompatActivity implements InstruccionesAyudaFragment.OnFragmentInteractionListener, InstruccionesJuegoPuzzleFragment.OnFragmentInteractionListener,
-        InstruccionesJuegoDrawFragment.OnFragmentInteractionListener,
-        InstruccionesRankingFragment.OnFragmentInteractionListener,
-        InstruccionesUsuarioFragment.OnFragmentInteractionListener,
-        InstruccionesAjustesFragment.OnFragmentInteractionListener {
+public class InstruccionesActivity extends AppCompatActivity implements IFragmentsInstructions {
     private ViewPager viewPager;
     private LinearLayout lPuntos;
     private TextView[] pSlide;
-   
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +32,9 @@ public class InstruccionesActivity extends AppCompatActivity implements Instrucc
         viewPager.addOnPageChangeListener(viewListener);
 
     }
+
+
+
 
     private void setIndicadorPuntos(int pos) {
         pSlide=new TextView[6];

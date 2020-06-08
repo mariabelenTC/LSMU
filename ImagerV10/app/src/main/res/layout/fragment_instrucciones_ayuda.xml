@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorRosaSalmonClaro"
 
-    tools:context=".fragments.InstruccionesAyudaFragment">
+    tools:context=".fragments.instrucciones.InstruccionesAyudaFragment">
 
     <ImageView
         android:id="@+id/yofragment"

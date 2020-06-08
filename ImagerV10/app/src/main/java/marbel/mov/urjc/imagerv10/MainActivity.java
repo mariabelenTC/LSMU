@@ -1,10 +1,12 @@
 package marbel.mov.urjc.imagerv10;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +25,30 @@ public class MainActivity extends AppCompatActivity implements ReportFragments, 
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedorFragments,fragmetInicio).commit();
 
 
+    }
+
+    public AlertDialog dialogEditUser(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+
+        builder.setTitle("Editar Usuarios");
+        builder.setMessage("Indica si quieres registrarte o iniciar sesión.\n\n Puedes editar un jugador desde la opción EDITAR");
+        builder.setNegativeButton("REGISTRAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"registrar jugador,", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        builder.setPositiveButton("EDITAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),"editar jugador,", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+        return builder.create();
     }
 
     @Override
@@ -62,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragments, 
 
     @Override
     public void editUsers() {
-        Toast.makeText(getApplicationContext(),"manejar usuarios desde el activity", Toast.LENGTH_SHORT).show();
+        dialogEditUser().show();
 
     }
 

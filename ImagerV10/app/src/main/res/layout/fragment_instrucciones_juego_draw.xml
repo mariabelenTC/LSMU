@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorNaranjaPalido"
-    tools:context=".fragments.InstruccionesJuegoDrawFragment">
+    tools:context=".fragments.instrucciones.InstruccionesJuegoDrawFragment">
 
     <ImageView
         android:layout_width="175dp"

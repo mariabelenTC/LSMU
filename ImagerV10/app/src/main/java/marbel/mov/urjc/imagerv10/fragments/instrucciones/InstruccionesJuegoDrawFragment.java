@@ -1,4 +1,4 @@
-package marbel.mov.urjc.imagerv10.fragments;
+package marbel.mov.urjc.imagerv10.fragments.instrucciones;
 
 import android.content.Context;
 import android.net.Uri;

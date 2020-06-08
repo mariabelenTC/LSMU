@@ -13,12 +13,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import marbel.mov.urjc.imagerv10.R;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesAjustesFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesAyudaFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesJuegoDrawFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesJuegoPuzzleFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesRankingFragment;
-import marbel.mov.urjc.imagerv10.fragments.InstruccionesUsuarioFragment;
+import marbel.mov.urjc.imagerv10.fragments.instrucciones.InstruccionesAjustesFragment;
+import marbel.mov.urjc.imagerv10.fragments.instrucciones.InstruccionesAyudaFragment;
+import marbel.mov.urjc.imagerv10.fragments.instrucciones.InstruccionesJuegoDrawFragment;
+import marbel.mov.urjc.imagerv10.fragments.instrucciones.InstruccionesJuegoPuzzleFragment;
+import marbel.mov.urjc.imagerv10.fragments.instrucciones.InstruccionesRankingFragment;
+import marbel.mov.urjc.imagerv10.fragments.instrucciones.InstruccionesUsuarioFragment;
 
 /**
  * A placeholder fragment containing a simple view.
